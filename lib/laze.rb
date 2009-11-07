@@ -12,7 +12,6 @@ require 'yaml'
 require 'liquid'
 
 # Internal requires
-require 'laze/layoutable'
 require 'laze/layout'
 require 'laze/item'
 require 'laze/template'

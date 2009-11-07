@@ -1,6 +1,6 @@
 module Laze
   class Item
-    include Laze::Layoutable
+    include Laze::Layout::Layoutable
 
     attr_accessor :content, :properties, :layout
 
