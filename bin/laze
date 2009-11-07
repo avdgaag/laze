@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+
+help = <<HELP
+Laze is a simple static website manager.
+
+Basic command line usage:
+HELP
+
+require 'optparse'
+require 'laze'
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = help
+
+  opts.on '--version', '-v', 'Display current version' do
+    puts 'Laze ' + Laze.version
+    exit 0
+  end
+end.parse!
+
+puts ARGV.inspect
