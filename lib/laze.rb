@@ -1,15 +1,18 @@
 $:.unshift File.dirname(__FILE__) # For use/testing when no gem is installed
 
-# Gems
-require 'rubygems'
+begin
+  # Core
+  require 'yaml'
 
-# Core
-require 'yaml'
+  # Standard library
 
-# Standard library
-
-# Third party
-require 'liquid'
+  # Third party
+  require 'liquid'
+rescue LoadError
+  # Gems
+  retry if require 'rubygems'
+  raise
+end
 
 # Internal requires
 require 'laze/layout'
