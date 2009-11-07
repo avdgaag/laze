@@ -4,14 +4,14 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "laze"
-    gem.summary = %Q{A simple static site manager}
+    gem.name        = "laze"
+    gem.summary     = %Q{A simple static site manager}
     gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "info@agwebdesign.nl"
-    gem.homepage = "http://github.com/avdgaag/laze"
-    gem.authors = ["Arjan van der Gaag"]
+    gem.email       = "info@agwebdesign.nl"
+    gem.homepage    = "http://github.com/avdgaag/laze"
+    gem.authors     = ["Arjan van der Gaag"]
     gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_dependency('liquid', '>= 1.9.0')
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
