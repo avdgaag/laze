@@ -21,4 +21,4 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-puts ARGV.inspect
+puts Laze::Secretary.run

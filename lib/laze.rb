@@ -9,8 +9,15 @@ require 'yaml'
 # Standard library
 
 # Third party
+require 'liquid'
 
 # Internal requires
+require 'laze/layoutable'
+require 'laze/layout'
+require 'laze/item'
+require 'laze/template'
+require 'laze/secretary'
+require 'laze/templates/liquid'
 
 module Laze
   def self.version
