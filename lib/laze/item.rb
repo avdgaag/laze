@@ -1,11 +1,21 @@
 module Laze
   class Item
-    include Laze::Layout::Layoutable
+    attr_accessor :properties, :parent
 
-    attr_accessor :content, :properties, :layout
+    def initialize(properties)
+      @properties, @parent = properties, nil
+    end
 
-    def initialize(content, properties, layout = nil)
-      @content, @properties, @layout = properties, content, layout
+    def filename
+      @properties[:filename]
+    end
+
+    def number_of_subitems
+      0
+    end
+
+    def ancestors
+      parent ? [parent, *parent.ancestors].reverse : []
     end
   end
 end

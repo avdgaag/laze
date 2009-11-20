@@ -5,6 +5,7 @@ begin
   require 'yaml'
 
   # Standard library
+  require 'fileutils'
 
   # Third party
   require 'liquid'
@@ -17,9 +18,14 @@ end
 # Internal requires
 require 'laze/layout'
 require 'laze/item'
+require 'laze/page'
+require 'laze/section'
 require 'laze/template'
 require 'laze/secretary'
 require 'laze/templates/liquid'
+require 'laze/filesystem'
+require 'laze/store'
+require 'laze/store/filesystem'
 
 module Laze
   def self.version
