@@ -6,6 +6,10 @@ module Laze
       @properties, @parent = properties, nil
     end
 
+    def has?(key)
+      @properties.has_key?(key)
+    end
+
     def filename
       @properties[:filename]
     end

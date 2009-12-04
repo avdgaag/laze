@@ -1,10 +1,22 @@
 module Laze
   class Secretary
-    def self.run
-      @target = Filesystem.new('output')
-      Store[:filesystem].each do |item|
-        @target.create item
+    @options = {
+      :store     => :filesystem,
+      :target    => :filesystem,
+      :directory => 'output'
+    }
+
+    def self.options
+      @options
+    end
+
+    def self.run(options = {})
+      @options = @options.merge(options)
+
+      Store[@options[:store]].each do |item|
+        Target[@options[:target], @options[:directory]].create item
       end
+
       'Done!'
     end
   end

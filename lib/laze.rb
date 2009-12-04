@@ -16,16 +16,20 @@ rescue LoadError
 end
 
 # Internal requires
-require 'laze/layout'
+require 'laze/plugin'
 require 'laze/item'
 require 'laze/page'
 require 'laze/section'
 require 'laze/template'
 require 'laze/secretary'
 require 'laze/templates/liquid'
-require 'laze/filesystem'
+require 'laze/target'
+require 'laze/target/filesystem'
 require 'laze/store'
 require 'laze/store/filesystem'
+
+# Require all available plugins
+Laze::Plugin.load_all
 
 module Laze
   def self.version

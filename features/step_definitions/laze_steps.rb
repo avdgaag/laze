@@ -19,9 +19,19 @@ Given /^I have a (.+?) directory$/ do |dir|
   FileUtils.mkdir(dir)
 end
 
-Given /^I have a (.+?) layout that contains '(.*)'$/ do |layout, text|
+Given /^I have a '(.+?)' layout that contains '(.*)'$/ do |layout, text|
   File.open(File.join('layouts', layout + '.html'), 'w') do |f|
     f.write(text)
+  end
+end
+
+Given /^I have a '(.+?)' layout with layout '(.+?)' that contains '(.*)'$/ do |filename, layout, text|
+  File.open(File.join('layouts', filename + '.html'), 'w') do |f|
+    f.write <<-EOF
+layout: #{layout}
+---
+#{text}
+EOF
   end
 end
 

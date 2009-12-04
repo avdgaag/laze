@@ -1,5 +1,5 @@
 title: Contact us via e-mail
-layout: default
+layout: subpage
 ---
 # Contact us via e-mail
 

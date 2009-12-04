@@ -12,7 +12,7 @@ Feature: Create sites
   Scenario: Basic site with a layout
     Given I have a layouts directory
     And I have an 'input/index.html' page with layout 'default' that contains 'page with layout'
-    And I have a default layout that contains 'Layout: {{ yield }}'
+    And I have a 'default' layout that contains 'Layout: {{ yield }}'
     When I run laze
     Then the output directory should exist
     And I should see 'Layout: page with layout' in 'output/index.html'
@@ -20,8 +20,8 @@ Feature: Create sites
   Scenario: Basic site with nested layouts
     Given I have a layouts directory
     And I have an 'input/index.html' page with layout 'post' that contains 'page'
-    And I have a post layout with a default layout that contains 'Post: {{ yield }}'
-    And I have a default layout that contains 'Layout: {{ yield }}'
+    And I have a 'post' layout with layout 'default' that contains 'Post: {{ yield }}'
+    And I have a 'default' layout that contains 'Layout: {{ yield }}'
     When I run laze
     Then the output directory should exist
     And I should see 'Layout: Post: page' in 'output/index.html'

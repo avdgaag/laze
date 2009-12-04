@@ -1,16 +1,16 @@
 module Laze
   class Page < Item
-    include Laze::Layout::Layoutable
+    include Laze::Plugin::Hookable
 
-    attr_accessor :content, :layout
+    attr_accessor :content
 
-    def initialize(properties, content, layout = nil)
-      @content, @layout = content, layout
+    def initialize(properties, content)
+      @content = content
       super(properties)
     end
 
     def to_s
-      content
+      hook(:generate_page_content, self).content
     end
   end
 end
