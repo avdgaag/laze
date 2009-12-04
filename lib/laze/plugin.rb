@@ -293,7 +293,7 @@ module Laze
         extend Sugar
 
         # Set up metadata properties
-        def_field :name, :author, :version, :priority, :description
+        def_field :name, :author, :version, :priority, :description, :builtin
       end
     end
 end

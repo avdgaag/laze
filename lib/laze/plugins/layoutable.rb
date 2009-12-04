@@ -2,6 +2,7 @@ Laze::Plugin.define 'layoutable' do
   author      'Arjan van der Gaag'
   version     '1.0'
   description 'Wrap pages in (nested) layouts.'
+  builtin     true
 
   def generate_page_content(page)
     if page.has?(:layout)
