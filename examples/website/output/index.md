@@ -10,7 +10,7 @@
         # Welcome
 
 Welcome to our awesome website.
-{% include tagline.html %}
+An awesome webpage.
 
 ## Lorem ipsum dolor sit amet...
 

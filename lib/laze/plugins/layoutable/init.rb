@@ -1,6 +1,6 @@
 Laze::Plugin.define 'layoutable' do
   author      'Arjan van der Gaag'
-  version     '0.0.1'
+  version     '1.0'
   description 'Wrap pages in (nested) layouts.'
 
   def generate_page_content(page)
