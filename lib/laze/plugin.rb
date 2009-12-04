@@ -111,6 +111,9 @@ module Laze
       Dir[File.join(File.dirname(__FILE__), 'plugins', '**', 'init.rb')].each do |filename|
         require filename
       end
+      Dir[File.join(File.dirname(__FILE__), 'plugins', '*.rb')].each do |filename|
+        require filename
+      end
     end
 
     # Define a new plugin as defined by the given block.
