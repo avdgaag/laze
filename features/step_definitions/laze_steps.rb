@@ -41,11 +41,12 @@ Given /^I have a '(.+?)' file that contains '(.*)'$/ do |file, text|
   end
 end
 
-Given /^I have an '(.*)' page(?: with (.*) '(.*)')? that contains '(.*)'$/ do |file, key, value, text|
+Given /^I have an '(.*?)' page(?: with (.*?) '(.*?)')?(?: and with (.*?) '(.*?)')? that contains '(.*)'$/ do |file, key, value, other_key, other_value, text|
   FileUtils.mkdir('input') unless File.directory?('input')
   File.open(file, 'w') do |f|
     f.write <<EOF
-#{key || 'layout'}: #{value || 'nil'}
+#{key}: #{value}
+#{other_key + ': ' + other_value unless other_key.nil?}
 ---
 #{text}
 EOF

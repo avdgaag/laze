@@ -12,7 +12,7 @@ Feature: Site data
   Scenario: use variables in a layout
     Given I have a layouts directory
     And I have a 'default' layout that contains '{{ page.title }}: {{ yield }}'
-    And I have an 'input/index.html' page with title 'Foo' that contains 'bar'
+    And I have an 'input/index.html' page with title 'Foo' and with layout 'default' that contains 'bar'
     When I run laze
     Then the output directory should exist
     And I should see 'Foo: bar' in 'output/index.html'
