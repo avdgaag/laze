@@ -24,7 +24,7 @@ module Laze
     alias_method :delete, :remove_item
 
     def number_of_subitems
-      @items.inject(0) { |total, item| total += item.number_of_subitems }
+      @items.inject(0) { |total, item| total += 1 + item.number_of_subitems }
     end
   end
 end

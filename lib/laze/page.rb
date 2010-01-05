@@ -23,7 +23,7 @@ module Laze
 
     def hook_self!(hook_name)
       hooked          = hook(hook_name, self)
-      self.properties = hooked.properties
+      self.properties = self.properties.merge(hooked.properties)
       self.content    = hooked.content
     end
   end

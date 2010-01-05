@@ -7,4 +7,5 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'laze'
 
 class Test::Unit::TestCase
+  include Laze
 end

@@ -1,7 +1,6 @@
 require 'helper'
 
-class TestItem < Test::Unit::TestCase
-  include Laze
+class TestItemPageAndSection < Test::Unit::TestCase
   context "with children" do
 
     setup do
@@ -17,7 +16,7 @@ class TestItem < Test::Unit::TestCase
     end
 
     should 'have subitems' do
-      assert_equal(3, @a.number_of_subitems)
+      assert_equal(4, @a.number_of_subitems)
     end
 
     should "enumerate over subitems" do
@@ -27,6 +26,11 @@ class TestItem < Test::Unit::TestCase
         i += 1
       end
       assert_equal(2, i)
+    end
+
+    should "count the number of ancestors" do
+      assert_equal(2, @y.ancestors.size)
+      assert_equal(0, @a.ancestors.size)
     end
   end
 end
