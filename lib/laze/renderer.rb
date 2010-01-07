@@ -15,6 +15,7 @@ module Laze
 
     def to_s(locals = {})
       output = markdownize(string)
+      output = wrap_in_layout(output)
       output = liquify(output, (options[:locals] || {}).merge(locals))
       output
     end
@@ -25,6 +26,16 @@ module Laze
     end
 
   private
+
+    def wrap_in_layout(string)
+      return string unless layout = Layout.find(options[:locals][:layout])
+      output = string
+      while layout
+        output = layout.wrap(output)
+        layout = Layout.find(layout.layout)
+      end
+      output
+    end
 
     # TODO: take options for output
     def markdownize(string)
