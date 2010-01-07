@@ -3,4 +3,4 @@ layout: subpage
 ---
 # Contact us via e-mail
 
-You can reach us at info [at] example.com.
+You can reach us at info \[at\] example.com.
