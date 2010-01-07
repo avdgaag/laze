@@ -9,6 +9,7 @@ begin
 
   # Third party
   require 'liquid'
+  require 'maruku'
 rescue LoadError
   # Gems
   retry if require 'rubygems'

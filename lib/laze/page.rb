@@ -14,9 +14,19 @@ module Laze
       properties[:output_filename] || properties[:filename]
     end
 
+    def render
+      @rendered_content ||= begin
+        # TODO: move stringify_keys into core extension
+        locals = properties.inject({}) do |options, (key, value)|
+          options[key.to_s] = value
+          options
+        end
+        Liquid::Template.parse(Maruku.new(content).to_html).render('page' => locals)
+      end
+    end
+
     def to_s
-      hook_self! :generate_page_content
-      content
+      render
     end
 
   private
