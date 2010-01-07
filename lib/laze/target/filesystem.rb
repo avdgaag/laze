@@ -21,7 +21,7 @@ module Laze
     private
 
       def create_page(item)
-        File.open(dir(item), 'w') { |f| f.write item }
+        File.open(dir(item), 'w') { |f| f.write Renderer.render(item) }
       end
 
       def create_section(item)

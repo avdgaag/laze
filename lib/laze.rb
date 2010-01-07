@@ -20,6 +20,7 @@ end
 require 'laze/plugin'
 require 'laze/item'
 require 'laze/page'
+require 'laze/renderer'
 require 'laze/section'
 require 'laze/template'
 require 'laze/secretary'
