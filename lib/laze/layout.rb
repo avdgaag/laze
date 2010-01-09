@@ -9,7 +9,7 @@ module Laze
     end
 
     def wrap(string)
-      content.gsub!(/\{\{\s*yield\s*\}\}/, string)
+      content.gsub(/\{\{\s*yield\s*\}\}/, string)
     end
 
     def layout
