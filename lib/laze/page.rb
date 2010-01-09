@@ -10,8 +10,7 @@ module Laze
     end
 
     def filename
-      hook_self! :filter_page_filename
-      properties[:output_filename] || properties[:filename]
+      @filename ||= properties[:filename].sub(/(?:md|mkd|liquid|markdown)$/, 'html')
     end
 
   private
