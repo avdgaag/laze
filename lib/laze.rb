@@ -6,6 +6,7 @@ begin
 
   # Standard library
   require 'fileutils'
+  require 'logger'
 
   # Third party
   require 'liquid'
@@ -29,9 +30,9 @@ require 'laze/store'
 require 'laze/store/filesystem'
 
 module Laze
-  def self.log(message)
-    puts message
-  end
+  LOGGER = Logger.new(STDERR)
+  LOGGER.level = Logger::DEBUG
+  LOGGER.datetime_format = "%H:%M:%S"
 
   def self.version
     yml = YAML.load(File.read(File.join(File.dirname(__FILE__), *%w[.. VERSION.yml])))

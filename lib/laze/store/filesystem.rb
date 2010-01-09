@@ -2,6 +2,7 @@ module Laze
   module Store
     class Filesystem < Base
       def initialize
+        Laze::LOGGER.debug "Initialized Store::Filesystem"
         Liquid::Template.file_system = LiquidFileSystem.new(Dir.pwd)
       end
 

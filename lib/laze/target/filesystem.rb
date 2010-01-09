@@ -6,6 +6,7 @@ module Laze
       attr_reader :output_dir
 
       def initialize(output_dir)
+        Laze::LOGGER.debug "Initialized Target::Filesystem"
         @output_dir = output_dir
         reset
       end
@@ -33,6 +34,7 @@ module Laze
       def reset
         FileUtils.rm_rf(@output_dir)
         FileUtils.mkdir(@output_dir)
+        Laze::LOGGER.debug "Emptied output directory"
       end
 
       # Get the correct path for a given item.
