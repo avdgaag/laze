@@ -1,6 +1,9 @@
 module Laze
   class Layout < Item
 
+    YIELD = /\{\{\s*yield\s*\}\}/
+    SINGLE_LINE_YIELD = /^(\s+)#{YIELD}\s*$/
+
     attr_accessor :content
 
     def initialize(properties, content)
@@ -9,7 +12,12 @@ module Laze
     end
 
     def wrap(string)
-      content.gsub(/\{\{\s*yield\s*\}\}/, string)
+      if content =~ SINGLE_LINE_YIELD
+        whitespace = $1
+        content.sub(SINGLE_LINE_YIELD, string.split(/\n/).map { |l| whitespace + l }.join("\n"))
+      else
+        content.sub(YIELD, string)
+      end
     end
 
     def layout
