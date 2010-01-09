@@ -21,5 +21,13 @@ module Laze
     def ancestors
       parent ? [parent, *parent.ancestors].reverse : []
     end
+
+    def to_s
+      filename
+    end
+
+    def inspect
+      "#<#{self.class}:0x#{self.object_id.to_s(16)} #{filename}>"
+    end
   end
 end

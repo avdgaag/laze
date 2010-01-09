@@ -14,10 +14,11 @@ module Laze
       @options = @options.merge(options)
 
       Store[@options[:store]].each do |item|
+        Laze.log "Processing #{item}"
         Target[@options[:target], @options[:directory]].create item
       end
 
-      'Done!'
+      Laze.log 'Done!'
     end
   end
 end

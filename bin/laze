@@ -21,4 +21,4 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-puts Laze::Secretary.run(options)
+Laze::Secretary.run(options)

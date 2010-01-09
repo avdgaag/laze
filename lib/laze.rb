@@ -29,6 +29,10 @@ require 'laze/store'
 require 'laze/store/filesystem'
 
 module Laze
+  def self.log(message)
+    puts message
+  end
+
   def self.version
     yml = YAML.load(File.read(File.join(File.dirname(__FILE__), *%w[.. VERSION.yml])))
     "#{yml[:major]}.#{yml[:minor]}.#{yml[:patch]}"
