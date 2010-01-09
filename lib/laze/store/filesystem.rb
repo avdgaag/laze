@@ -1,30 +1,50 @@
 module Laze
   module Store
     class Filesystem < Base
-      include Laze::Plugin::Hookable
+      def initialize
+        Liquid::Template.file_system = LiquidFileSystem.new(Dir.pwd)
+      end
 
       def each(start_dir = 'input', &block)
         scan_directory(start_dir, &block)
       end
 
-      def layouts
-        Dir.entries('layouts') - %w{. ..}
+      def layout(layout_name)
+        filename = File.join('layouts', "#{layout_name}.html")
+        raise LayoutNotFoundException.new(("Layout '%s.*' not found" % filename)) unless File.exists?(filename)
+        content = FileWithMetadata.new(IO.read(filename))
       end
 
-      def layout(filename)
-        candidates = Dir['layouts/' + filename + '.*']
-
-        raise LayoutNotFoundException.new(("Layout '%s.*' not found" % filename)) unless candidates.any?
-        raise AmbiguousLayoutNameException.new("Could not decide between %s for layout '%s'" % [(candidates * ', '), filename]) unless candidates.size == 1
-
-        content = FileWithMetadata.new(IO.read(candidates.first))
-        hook(:filter_layout, content)
-      end
-
-      AmbiguousLayoutNameException = Class.new(Exception)
       LayoutNotFoundException = Class.new(Exception)
 
     private
+
+      class LiquidFileSystem < Liquid::BlankFileSystem
+        def initialize(root)
+          @root = root
+        end
+
+        def read_template_file(template_path)
+          filename = full_path(template_path)
+          raise Liquid::FileSystemError, "No such template '#{filename}'" unless File.exists?(filename)
+          File.read(filename)
+        end
+
+        def full_path(template_path)
+          raise Liquid::FileSystemError, "Illegal template name '#{template_path}'" unless template_path =~ /^[^.\/][a-zA-Z0-9_\/]+$/
+
+          full_path = if template_path.include?('/')
+            File.join(@root, 'includes', File.dirname(template_path), "#{File.basename(template_path)}.html")
+          else
+            File.join(@root, 'includes', "#{template_path}.html")
+          end
+
+          raise Liquid::FileSystemError, "Illegal template path '#{File.expand_path(full_path)}'" unless File.expand_path(full_path) =~ /^#{File.expand_path(@root)}/
+
+          full_path
+        end
+
+      end
 
       class FileWithMetadata
         attr_reader :content, :properties

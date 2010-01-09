@@ -15,4 +15,4 @@ Feature: Site data
     And I have an 'input/index.html' page with title 'Foo' and with layout 'default' that contains 'bar'
     When I run laze
     Then the output directory should exist
-    And I should see 'Foo: bar' in 'output/index.html'
+    And I should see 'Foo: <p>bar</p>' in 'output/index.html'

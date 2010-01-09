@@ -9,7 +9,7 @@ begin
 
   # Third party
   require 'liquid'
-  require 'maruku'
+  require 'rdiscount'
 rescue LoadError
   # Gems
   retry if require 'rubygems'
@@ -17,7 +17,6 @@ rescue LoadError
 end
 
 # Internal requires
-require 'laze/plugin'
 require 'laze/item'
 require 'laze/page'
 require 'laze/renderer'
@@ -28,9 +27,6 @@ require 'laze/target'
 require 'laze/target/filesystem'
 require 'laze/store'
 require 'laze/store/filesystem'
-
-# Require all available plugins
-Laze::Plugin.load_all
 
 module Laze
   def self.version

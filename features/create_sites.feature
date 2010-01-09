@@ -15,7 +15,7 @@ Feature: Create sites
     And I have a 'default' layout that contains 'Layout: {{ yield }}'
     When I run laze
     Then the output directory should exist
-    And I should see 'Layout: page with layout' in 'output/index.html'
+    And I should see 'Layout: <p>page with layout</p>' in 'output/index.html'
 
   Scenario: Basic site with nested layouts
     Given I have a layouts directory
@@ -24,11 +24,11 @@ Feature: Create sites
     And I have a 'default' layout that contains 'Layout: {{ yield }}'
     When I run laze
     Then the output directory should exist
-    And I should see 'Layout: Post: page' in 'output/index.html'
+    And I should see 'Layout: Post: <p>page</p>' in 'output/index.html'
 
   Scenario: Basic site with includes
     Given I have a includes directory
-    And I have an 'input/index.html' file that contains 'Included: {% include foo.html %}'
+    And I have an 'input/index.html' file that contains 'Included: {% include \'foo\' %}'
     And I have an 'includes/foo.html' file that contains 'foo'
     When I run laze
     Then the output directory should exist

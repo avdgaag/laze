@@ -17,7 +17,8 @@ module Laze
     # HTML boiler plate stuff (<html>, <doctype>, etc) will get messed up
     # when markdownized.
     def to_s(locals = {})
-      output = markdownize(string)
+      output = string
+      output = markdownize(output)
       output = wrap_in_layout(output)
       output = liquify(output, (options[:locals] || {}).merge(locals))
       output
@@ -42,7 +43,7 @@ module Laze
 
     # TODO: take options for output
     def markdownize(string)
-      Maruku.new(string).to_html
+      RDiscount.new(string).to_html
     end
 
     # TODO: take options for output

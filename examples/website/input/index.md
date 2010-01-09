@@ -4,7 +4,7 @@ layout: default
 # Welcome
 
 Welcome to our awesome website.
-{% include tagline.html %}
+{% include 'tagline' %}
 
 ## Lorem ipsum dolor sit amet...
 
