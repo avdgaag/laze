@@ -13,6 +13,9 @@ module Laze
       end
     end
 
+    # First apply markdown, only then wrap in layout. A layout that contains
+    # HTML boiler plate stuff (<html>, <doctype>, etc) will get messed up
+    # when markdownized.
     def to_s(locals = {})
       output = markdownize(string)
       output = wrap_in_layout(output)
