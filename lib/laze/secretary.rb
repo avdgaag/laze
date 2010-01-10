@@ -25,7 +25,7 @@ module Laze
         target.create item
       end
 
-      Laze::LOGGER.info 'Done!'
+      Laze.info 'Done!'
     end
   end
 end

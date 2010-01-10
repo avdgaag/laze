@@ -28,7 +28,7 @@ module Laze
     private
 
       def scan_directory(path)
-        Laze::LOGGER.debug "Recursing into #{path}"
+        Laze.debug "Recursing into #{path}"
 
         Dir.foreach(path) do |filename|
           # Skip directories
@@ -38,7 +38,7 @@ module Laze
           full_path = File.join(path, filename)
 
           if File.file?(full_path)
-            Laze::LOGGER.debug "Processing file #{path}"
+            Laze.debug "Processing file #{path}"
             yield FileWithMetadata.new(File.read(full_path), { :filename => filename }).to_page
 
           elsif File.directory?(full_path)
@@ -49,7 +49,7 @@ module Laze
             yield section
 
           else
-            Laze::LOGGER.debug "Skipping #{path}"
+            Laze.debug "Skipping #{path}"
           end
         end
       end

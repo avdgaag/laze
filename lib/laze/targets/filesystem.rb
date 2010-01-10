@@ -34,7 +34,7 @@ module Laze
       def reset
         FileUtils.rm_rf(@output_dir)
         FileUtils.mkdir(@output_dir)
-        Laze::LOGGER.debug "Emptied output directory"
+        Laze.debug "Emptied output directory"
       end
 
       # Get the correct path for a given item.

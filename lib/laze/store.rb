@@ -14,12 +14,12 @@ module Laze
     end
 
     def self.inherited(child)
-      Laze::LOGGER.debug "Registering store #{child}"
+      Laze.debug "Registering store #{child}"
       @stores << child
     end
 
     def initialize
-      Laze::LOGGER.debug "Initialized #{self.class.name}"
+      Laze.debug "Initialized #{self.class.name}"
       Liquid::Template.file_system = self
     end
 

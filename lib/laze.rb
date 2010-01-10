@@ -22,10 +22,28 @@ module Laze
   LOGGER.level = Logger::DEBUG
   LOGGER.datetime_format = "%H:%M:%S"
 
+  def debug(msg)
+    LOGGER.debug(msg)
+  end
+
+  def warn(msg)
+    LOGGER.warn(msg)
+  end
+
+  def info(msg)
+    LOGGER.info(msg)
+  end
+
+  def fatal(msg)
+    LOGGER.fatal(msg)
+  end
+
   def self.version
     yml = YAML.load(File.read(File.join(File.dirname(__FILE__), *%w[.. VERSION.yml])))
     "#{yml[:major]}.#{yml[:minor]}.#{yml[:patch]}"
   end
+
+  extend self
 end
 
 # Internal requires

@@ -14,12 +14,12 @@ module Laze
     end
 
     def self.inherited(child)
-      Laze::LOGGER.debug "Registering target #{child}"
+      Laze.debug "Registering target #{child}"
       @targets << child
     end
 
     def initialize
-      Laze::LOGGER.debug "Initialized #{self.class.name}"
+      Laze.debug "Initialized #{self.class.name}"
     end
 
     def create(item)
