@@ -39,7 +39,13 @@ module Laze
 
           if File.file?(full_path)
             Laze.debug "Processing file #{path}"
-            yield FileWithMetadata.new(File.read(full_path), { :filename => filename }).to_page
+            file = FileWithMetadata.new(File.read(full_path), { :filename => filename })
+            yield case File.extname(filename)
+            when /\.(css|less)/: file.to_stylesheet
+            when '.js': file.to_javascript
+            else
+              file.to_page
+            end
 
           elsif File.directory?(full_path)
             section = Section.new({ :filename => filename })
@@ -74,6 +80,14 @@ module Laze
 
         def to_layout
           Layout.new(properties, content)
+        end
+
+        def to_stylesheet
+          Stylesheet.new(properties, content)
+        end
+
+        def to_javascript
+          Javascript.new(properties, content)
         end
 
       private

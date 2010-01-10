@@ -15,6 +15,7 @@ module Laze
       def create(item)
         case item
         when Page: create_page(item)
+        when Stylesheet, Javascript: create_file(item)
         when Section: create_section(item)
         end
       end
@@ -25,6 +26,10 @@ module Laze
         File.open(dir(item), 'w') { |f| f.write Renderer.render(item) }
       end
 
+      def create_file(item)
+        File.open(dir(item), 'w') { |f| f.write Minifier.render(item) }
+      end
+
       def create_section(item)
         FileUtils.mkdir(dir(item))
         item.each { |subitem| create(subitem) }
@@ -32,8 +37,8 @@ module Laze
 
       # Empty the current output directory
       def reset
-        FileUtils.rm_rf(@output_dir)
-        FileUtils.mkdir(@output_dir)
+        FileUtils.rm_rf(output_dir)
+        FileUtils.mkdir(output_dir)
         Laze.debug "Emptied output directory"
       end
 
@@ -41,7 +46,7 @@ module Laze
       # This finds all the ancestors for an item, joins them together
       # as directories and returns the path name.
       def dir(item)
-        File.join(@output_dir, *(item.ancestors.map{ |i| i.filename } << item.filename))
+        File.join(output_dir, *(item.ancestors.map{ |i| i.filename } << item.filename))
       end
     end
   end
