@@ -1,28 +1,38 @@
 module Laze
-  module Store
-    def self.[](kind)
-      Base[kind]
+  class Store
+    include Enumerable
+
+    StoreException = Class.new(Exception)
+    FileSystemException = Class.new(StoreException)
+
+    @stores = []
+
+    def self.find(kind)
+      stores = @stores.select { |s| s.name.to_s.split('::').last.downcase.to_sym == kind }
+      raise StoreException, 'No such store.' unless stores.any?
+      stores.first
     end
 
-    class Base
-      @children = {}
-
-      class << self
-        def inherited(child)
-          @children[child.name.downcase.split(/::/).last.to_sym] = child
-        end
-
-        def for(kind)
-          @children[kind].send(:new) rescue NoMethodError raise ChildNotFoundException
-        end
-        alias_method :[], :for
-
-        private :new
-      end
-
-      include Enumerable
+    def self.inherited(child)
+      Laze::LOGGER.debug "Registering store #{child}"
+      @stores << child
     end
 
-    ChildNotFoundException = Class.new(Exception)
+    def initialize
+      Laze::LOGGER.debug "Initialized #{self.name}"
+      Liquid::Template.file_system = self
+    end
+
+    def each
+      raise 'This is a generic store. Please use a subclass.'
+    end
+
+    def find_layout(layout_name)
+      raise 'This is a generic store. Please use a subclass.'
+    end
+
+    def read_template_file
+      raise 'This is a generic store. Please use a subclass.'
+    end
   end
 end

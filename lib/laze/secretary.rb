@@ -10,12 +10,19 @@ module Laze
       @options
     end
 
+    def self.store
+      @store ||= Store.find(@options[:store]).new
+    end
+
+    def self.target
+      @target ||= Target[@options[:target], @options[:directory]]
+    end
+
     def self.run(options = {})
       @options = @options.merge(options)
 
-      Store[@options[:store]].each do |item|
-        Laze::LOGGER.info "Processing #{item}"
-        Target[@options[:target], @options[:directory]].create item
+      store.each do |item|
+        target.create item
       end
 
       Laze::LOGGER.info 'Done!'

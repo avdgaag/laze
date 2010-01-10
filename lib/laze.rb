@@ -17,18 +17,6 @@ rescue LoadError
   raise
 end
 
-# Internal requires
-require 'laze/item'
-require 'laze/page'
-require 'laze/renderer'
-require 'laze/section'
-require 'laze/layout'
-require 'laze/secretary'
-require 'laze/target'
-require 'laze/target/filesystem'
-require 'laze/store'
-require 'laze/store/filesystem'
-
 module Laze
   LOGGER = Logger.new(STDERR)
   LOGGER.level = Logger::DEBUG
@@ -39,3 +27,16 @@ module Laze
     "#{yml[:major]}.#{yml[:minor]}.#{yml[:patch]}"
   end
 end
+
+# Internal requires
+require 'laze/core_extensions'
+require 'laze/item'
+require 'laze/page'
+require 'laze/renderer'
+require 'laze/section'
+require 'laze/layout'
+require 'laze/secretary'
+require 'laze/target'
+require 'laze/target/filesystem'
+require 'laze/store'
+require 'laze/stores/filesystem'

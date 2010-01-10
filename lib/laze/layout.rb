@@ -26,8 +26,7 @@ module Laze
 
     def self.find(layout_name)
       return unless layout_name
-      file = Store[Secretary.options[:store]].layout(layout_name)
-      new file.properties, file.content
+      Secretary.store.find_layout(layout_name)
     end
   end
 end
