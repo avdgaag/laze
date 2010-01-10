@@ -50,6 +50,7 @@ end
 require 'laze/core_extensions'
 require 'laze/item'
 require 'laze/page'
+require 'laze/asset'
 require 'laze/stylesheet'
 require 'laze/javascript'
 require 'laze/renderer'
