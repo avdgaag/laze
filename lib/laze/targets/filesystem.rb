@@ -8,6 +8,7 @@ module Laze
       def initialize(output_dir)
         @output_dir = output_dir
         reset
+        super()
       end
 
       # Manifest an item -- write it to disk

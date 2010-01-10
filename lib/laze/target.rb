@@ -19,7 +19,7 @@ module Laze
     end
 
     def initialize
-      Laze::LOGGER.debug "Initialized #{self.name}"
+      Laze::LOGGER.debug "Initialized #{self.class.name}"
     end
 
     def create(item)

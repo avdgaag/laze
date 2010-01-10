@@ -19,7 +19,7 @@ module Laze
     end
 
     def initialize
-      Laze::LOGGER.debug "Initialized #{self.name}"
+      Laze::LOGGER.debug "Initialized #{self.class.name}"
       Liquid::Template.file_system = self
     end
 

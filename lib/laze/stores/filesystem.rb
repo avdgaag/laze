@@ -7,6 +7,7 @@ module Laze
 
       def initialize(root = Dir.pwd)
         @root = root
+        super()
       end
 
       def each(&block)
