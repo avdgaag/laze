@@ -1,4 +1,4 @@
-class Hash
+class Hash #:nodoc:
   def stringify_keys
     inject({}) do |output, (key, value)|
       output[(key.to_s rescue key) || key] = value
