@@ -1,5 +1,5 @@
 module Laze
-  module Stores
+  module Stores #:nodoc:
     class Filesystem < Store
       INCLUDES_DIR = 'includes'
       LAYOUTS_DIR  = 'layouts'

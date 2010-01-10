@@ -1,7 +1,15 @@
 module Laze
-  module Renderers
+  module Renderers #:nodoc:
+    # Renders Page objects to an HTML page. This means applying text filters,
+    # layouts and the Liquid templating engine to a source file and returning
+    # the full HTML result file.
+    #--
+    # TODO: make the text filter to use optional and customizable, like
+    #       markdown, textile, rdoc, etc.
+    # TODO: move text filter into the page class, since its the page's
+    #       responsibility what text filter to use.
     class PageRenderer < Renderer
-      def initialize(page)
+      def initialize(page) #:nodoc:
         raise ArgumentError unless page.is_a?(Page)
         super
       end

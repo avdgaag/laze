@@ -1,5 +1,5 @@
 module Laze
-  class Asset < Item
+  class Asset < Item # :nodoc:
     attr_accessor :content
 
     def initialize(properties, content)

@@ -1,7 +1,9 @@
 module Laze
-  module Renderers
+  module Renderers #:nodoc:
+    # Render CSS source files to output files. Does nothing right now,
+    # just output the CSS directly.
     class StylesheetRenderer < Renderer
-      def initialize(page)
+      def initialize(page) #:nodoc:
         raise ArgumentError unless page.is_a?(Stylesheet)
         super
       end

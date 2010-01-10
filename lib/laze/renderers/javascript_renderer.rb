@@ -1,7 +1,9 @@
 module Laze
-  module Renderers
+  module Renderers #:nodoc:
+    # Render javascript source files to output files. Does nothing right now,
+    # just output the javascript directly.
     class JavascriptRenderer < Renderer
-      def initialize(page)
+      def initialize(page) #:nodoc:
         raise ArgumentError unless page.is_a?(Javascript)
         super
       end

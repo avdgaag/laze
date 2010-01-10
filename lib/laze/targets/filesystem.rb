@@ -1,5 +1,5 @@
 module Laze
-  module Targets
+  module Targets #:nodoc:
     class Filesystem < Target
       # The base directory to create all the files in. This is relative
       # the location where laze is run from.
