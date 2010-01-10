@@ -15,7 +15,7 @@ module Laze
 
     def self.inherited(child)
       Laze::LOGGER.debug "Registering target #{child}"
-      @target << child
+      @targets << child
     end
 
     def initialize
