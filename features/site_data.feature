@@ -16,3 +16,11 @@ Feature: Site data
     When I run laze
     Then the output directory should exist
     And I should see 'Foo: <p>bar</p>' in 'output/index.html'
+
+  Scenario: use variables in an include
+    Given I have a includes directory
+    And I have an 'includes/foo.html' file that contains '{{ page.title }}'
+    And I have an 'input/index.html' page with title 'Foo' that contains '{% include \'foo\' %}'
+    When I run laze
+    Then the output directory should exist
+    And I should see 'Foo' in 'output/index.html'

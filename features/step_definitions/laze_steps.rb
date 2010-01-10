@@ -9,7 +9,7 @@ After do
 end
 
 Given /^I have an '(.+?)' file that contains '(.+?)'$/ do |file, text|
-  FileUtils.mkdir('input') unless File.directory?('input')
+  FileUtils.mkdir_p(File.dirname(file)) # unless File.directory?('input')
   File.open(file, 'w') do |f|
     f.write(text)
   end

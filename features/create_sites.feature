@@ -9,6 +9,12 @@ Feature: Create sites
     Then the output directory should exist
     And I should see 'basic site' in 'output/index.html'
 
+  Scenario: Site with directories
+    Given I have an 'input/contact/index.html' file that contains 'contact!'
+    When I run laze
+    Then the output directory should exist
+    And I should see 'contact!' in 'output/contact/index.html'
+
   Scenario: Basic site with a layout
     Given I have a layouts directory
     And I have an 'input/index.html' page with layout 'default' that contains 'page with layout'
@@ -33,3 +39,15 @@ Feature: Create sites
     When I run laze
     Then the output directory should exist
     And I should see 'Included: foo' in 'output/index.html'
+
+  Scenario: CSS files
+    Given I have an 'input/base.css' file that contains 'foo'
+    When I run laze
+    Then the output directory should exist
+    And I should see 'foo' in 'output/base.css'
+
+  Scenario: Javascript files
+    Given I have an 'input/base.js' file that contains 'foo'
+    When I run laze
+    Then the output directory should exist
+    And I should see 'foo' in 'output/base.js'
