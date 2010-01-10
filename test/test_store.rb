@@ -1,17 +1,18 @@
 require 'helper'
 
 class TestStore < Test::Unit::TestCase
-  include Laze::Store
   should 'return raise when no suitable child is found' do
-    assert_raise(ChildNotFoundException) { Base.for(:foo) }
+    assert_raise(Store::StoreException) { Store.find(:foo) }
   end
 
-  should 'not be able to create' do
-    assert_raise(NoMethodError) { Base.new }
+  should 'raise when trying to create' do
+    store = Store.new
+    %w{each read_template_file find_layout}.each do |method|
+      assert_raise(RuntimeError) { store.send(method.to_sym) }
+    end
   end
 
   should 'return suitable strategy' do
-    assert_kind_of(Base, Base.for(:filesystem))
-    assert_kind_of(Base, Base[:filesystem])
+    assert_kind_of(Store, Store.find(:filesystem).new)
   end
 end

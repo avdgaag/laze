@@ -27,7 +27,7 @@ module Laze
       raise 'This is a generic store. Please use a subclass.'
     end
 
-    def find_layout(layout_name)
+    def find_layout
       raise 'This is a generic store. Please use a subclass.'
     end
 
