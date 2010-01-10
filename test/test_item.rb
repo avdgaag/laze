@@ -4,7 +4,7 @@ class TestItemPageAndSection < Test::Unit::TestCase
   context "with children" do
 
     setup do
-      @x = Page.new({ :title => 'x' }, 'page x')
+      @x = Page.new({ :title => 'x', :filename => 'foo' }, 'page x')
       @y = Page.new({ :title => 'y' }, 'page y')
       @z = Page.new({ :title => 'z' }, 'page z')
       @a = Section.new({ :title => 'a' })
@@ -15,8 +15,27 @@ class TestItemPageAndSection < Test::Unit::TestCase
       @a.add_item @b
     end
 
+    should "tell it has a property" do
+      assert @x.has?(:title)
+      assert !@x.has?(:foo)
+    end
+
+    should "tell its filename" do
+      assert_equal('foo', @x.filename)
+      assert_equal(@x.filename, @x.properties[:filename])
+    end
+
+    should "convert to string by its filename" do
+      assert_equal('foo', @x.to_s)
+    end
+
     should 'have subitems' do
       assert_equal(4, @a.number_of_subitems)
+    end
+
+    should "remove subitems" do
+      assert_equal(3, @a.remove_item(@x).number_of_subitems)
+      assert_nil(@x.parent)
     end
 
     should "enumerate over subitems" do

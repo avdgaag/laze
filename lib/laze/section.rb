@@ -20,6 +20,7 @@ module Laze
     def remove_item(item)
       @items.delete(item)
       item.parent = nil
+      self
     end
     alias_method :delete, :remove_item
 
