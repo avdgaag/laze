@@ -11,7 +11,7 @@ module Laze
     attr_accessor :item
 
     def initialize(item) #:nodoc:
-      raise ArgumentError, 'Please provide either a javascript or stylesheet file.' unless item.is_a?(Stylesheet) || item.is_a?(Javascript)
+      raise ArgumentError, 'Please provide an Asset subclass instance.' unless item.kind_of?(Asset)
       @item = item
     end
 
