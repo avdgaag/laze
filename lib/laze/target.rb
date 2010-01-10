@@ -21,5 +21,9 @@ module Laze
     def initialize
       Laze::LOGGER.debug "Initialized #{self.name}"
     end
+
+    def create(item)
+      raise 'This is a generic target. Please use a subclass.'
+    end
   end
 end

@@ -15,7 +15,7 @@ module Laze
     end
 
     def self.target
-      @target ||= Target[@options[:target], @options[:directory]]
+      @target ||= Target.find(@options[:target]).new(@options[:directory])
     end
 
     def self.run(options = {})

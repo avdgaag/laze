@@ -1,12 +1,11 @@
 module Laze
-  module Target
-    class Filesystem < Base
+  module Targets
+    class Filesystem < Target
       # The base directory to create all the files in. This is relative
       # the location where laze is run from.
       attr_reader :output_dir
 
       def initialize(output_dir)
-        Laze::LOGGER.debug "Initialized Target::Filesystem"
         @output_dir = output_dir
         reset
       end
