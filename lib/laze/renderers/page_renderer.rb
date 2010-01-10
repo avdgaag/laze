@@ -11,7 +11,7 @@ module Laze
     class PageRenderer < Renderer
       def initialize(page) #:nodoc:
         raise ArgumentError unless page.is_a?(Page)
-        super
+        super(page.filtered_content, page.properties)
       end
 
       # First apply markdown, only then wrap in layout. A layout that contains
@@ -19,7 +19,6 @@ module Laze
       # when markdownized.
       def render(locals = {})
         output = string
-        output = markdownize(output)
         output = wrap_in_layout(output)
         output = liquify(output, (options[:locals] || {}).merge(locals))
         output
@@ -41,11 +40,6 @@ module Laze
           layout = Layout.find(layout.layout)
         end
         output
-      end
-
-      # TODO: take options for output
-      def markdownize(string)
-        RDiscount.new(string).to_html
       end
 
       # TODO: take options for output
