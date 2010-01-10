@@ -11,6 +11,7 @@ begin
   # Third party
   require 'liquid'
   require 'rdiscount'
+  require 'redcloth'
 rescue LoadError
   # Gems
   retry if require 'rubygems'

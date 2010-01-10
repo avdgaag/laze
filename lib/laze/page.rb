@@ -12,7 +12,8 @@ module Laze
     # Convert this page's content to HTML using a text filter. You can set
     # the text filter to use with a property +text_filter+.
     #
-    # Current filters supported are markdown and none. Default is markdown.
+    # Current filters supported are markdown, rdoc and none. Default is
+    # markdown.
     def filtered_content
       text_filter ? text_filter.new(content).to_html : content
     end
@@ -29,6 +30,7 @@ module Laze
     def text_filter
       case properties[:filter]
       when 'markdown': RDiscount
+      when 'textile': RedCloth
       when 'none': nil
       else
         RDiscount
