@@ -14,7 +14,7 @@ module Laze
       # Manifest an item -- write it to disk
       def create(item)
         case item
-        when Page: create_page(item)
+        when Page, Asset: create_page(item)
         when Stylesheet, Javascript: create_file(item)
         when Section: create_section(item)
         end
@@ -24,10 +24,6 @@ module Laze
 
       def create_page(item)
         File.open(dir(item), 'w') { |f| f.write Renderer.render(item) }
-      end
-
-      def create_file(item)
-        File.open(dir(item), 'w') { |f| f.write Minifier.render(item) }
       end
 
       def create_section(item)
