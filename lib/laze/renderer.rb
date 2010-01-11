@@ -15,7 +15,7 @@ module Laze
     attr_reader :string
 
     def initialize(item_or_string, options = nil) #:nodoc:
-      raise ArgmentError, 'Please provide an item' unless item_or_string.kind_of?(Item) || (item_or_string.is_a?(String) && options.is_a?(Hash))
+      raise ArgumentError, 'Please provide an item' unless item_or_string.kind_of?(Item) || (item_or_string.is_a?(String) && options.is_a?(Hash))
       if item_or_string.is_a?(Item)
         @string  = item_or_string.content
         @options = { :locals => item_or_string.properties }
@@ -33,12 +33,12 @@ module Laze
     # Shortcut method to <tt>new(...).render</tt>
     # This will automatically select the right subclass to use for the
     # incoming item.
-    def self.render(item)
+    def self.render(item, locals = {})
       case item
       when Page: Renderers::PageRenderer
       when Stylesheet: Renderers::StylesheetRenderer
       when Javascript: Renderers::JavascriptRenderer
-      end.new(item).render
+      end.new(item).render(locals)
     end
   end
 end

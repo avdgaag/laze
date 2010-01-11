@@ -1,6 +1,6 @@
 require 'helper'
 
-class TestItemPageAndSection < Test::Unit::TestCase
+class TestCoreExtensions < Test::Unit::TestCase
   context "hashes" do
     setup do
       @a = { 'foo' => 'bar' }

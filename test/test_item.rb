@@ -20,6 +20,10 @@ class TestItemPageAndSection < Test::Unit::TestCase
       assert !@x.has?(:foo)
     end
 
+    should "inspect nicely" do
+      assert_match(/#<Laze::Page:0x\w+? foo>/, @x.inspect)
+    end
+
     should "tell its filename" do
       assert_equal('foo', @x.filename)
       assert_equal(@x.filename, @x.properties[:filename])

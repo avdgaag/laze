@@ -10,8 +10,14 @@ class TestRenderer < Test::Unit::TestCase
       assert_raise(ArgumentError) { Renderer.new(0, 1, 2) }
     end
 
-    should "raise an error when not passed in a page or string" do
+    should "raise an error when not passed in an item or string" do
       assert_raise(ArgumentError) { Renderer.new(0) }
+      assert_nothing_raised(ArgumentError) { Renderer.new(Page.new({}, 'foo')) }
+      assert_nothing_raised(ArgumentError) { Renderer.new('foo', {}) }
+    end
+
+    should "raise an error when using the generic class" do
+      assert_raise(RuntimeError) { Renderer.new('foo', {}).render }
     end
   end
 
@@ -19,21 +25,13 @@ class TestRenderer < Test::Unit::TestCase
     should 'take a string and options' do
       renderer = Renderer.new('foo', { :bar => 'bar' })
       assert_equal('foo', renderer.string)
-      assert_equal({ :bar => 'bar'}, renderer.options)
-    end
-
-    should 'default options to an empty hash' do
-      assert_equal({}, Renderer.new('foo').options)
-    end
-
-    should 'take an page as string and options' do
-      renderer = Renderer.new(Page.new({ :bar => 'bar'}, 'foo'))
-      assert_equal('foo', renderer.string)
       assert_equal({ :locals => { :bar => 'bar' }}, renderer.options)
     end
 
-    should "use the the shortcut class method to get the same result" do
-      assert_equal(Renderer.new('foo').render, Renderer.render('foo'))
+    should 'take a page as string and options' do
+      renderer = Renderer.new(Page.new({ :bar => 'bar'}, 'foo'))
+      assert_equal('foo', renderer.string)
+      assert_equal({ :locals => { :bar => 'bar' }}, renderer.options)
     end
   end
 
@@ -41,19 +39,17 @@ class TestRenderer < Test::Unit::TestCase
     setup do
       @page = Page.new({ :layout => 'foo' }, 'bar')
       @layout = Layout.new({}, 'layout: {{ yield }}')
-      @renderer = Renderer.new(@page)
       Layout.expects(:find).with('foo').returns(@layout)
       Layout.expects(:find).with(nil).returns(nil)
     end
 
     should "wrap in layout" do
-      assert_equal("layout: <p>bar</p>\n", @renderer.render)
+      assert_equal("layout: <p>bar</p>\n", Renderer.render(@page))
     end
 
     should "take extra locals" do
-      @renderer.expects(:liquify).with("layout: <p>bar</p>\n", { :layout => 'foo', :title => 'bla' })
-      @renderer.render :title => 'bla'
+      Renderers::PageRenderer.any_instance.expects(:liquify).with("layout: <p>bar</p>\n", { :layout => 'foo', :title => 'bla' })
+      Renderer.render(@page, :title => 'bla')
     end
   end
-
 end
