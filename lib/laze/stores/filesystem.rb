@@ -1,10 +1,17 @@
 module Laze
   module Stores #:nodoc:
     class Filesystem < Store
+      # Path from the project root to where includes are stored.
       INCLUDES_DIR = 'includes'
+
+      # Path from the project root to where layouts are stored.
       LAYOUTS_DIR  = 'layouts'
+
+      # Path from the project root to where all input files are stored.
       INPUT_DIR    = 'input'
 
+      # Create a new filesystem object for a given project root directory,
+      # which defaults to the current working directory.
       def initialize(root = Dir.pwd)
         @root = root
         super()
@@ -60,7 +67,7 @@ module Laze
         end
       end
 
-      class FileWithMetadata
+      class FileWithMetadata #:nodoc:
         attr_reader :content, :properties
 
         METADATA_SEPARATOR = /^---$\s*/
