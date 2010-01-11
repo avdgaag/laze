@@ -12,8 +12,10 @@ class TestLayout < Test::Unit::TestCase
 
     should "ask secretary for a layout" do
       store = mock()
+      current = mock()
       store.expects(:find_layout).with('foo').returns('bar')
-      Secretary.expects(:store).returns(store)
+      current.expects(:store).returns(store)
+      Secretary.expects(:current).returns(current)
       assert_equal('bar', Layout.find('foo'))
     end
   end

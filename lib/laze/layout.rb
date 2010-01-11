@@ -107,7 +107,7 @@ module Laze
     # otherwise.
     def self.find(layout_name)
       return unless layout_name
-      Secretary.store.find_layout(layout_name)
+      Secretary.current.store.find_layout(layout_name)
     end
   end
 end
