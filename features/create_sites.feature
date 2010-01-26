@@ -64,3 +64,10 @@ Feature: Create sites
     Then the output directory should exist
     And I should see 'foo' in 'output/test.html'
     And I should see 'test.html' in 'output/sitemap.xml'
+
+  Scenario: robots.txt
+    Given I have an 'input/test.html' file that contains 'foo'
+    When I run laze
+    Then the output directory should exist
+    And I should see 'foo' in 'output/test.html'
+    And I should see 'Sitemap: sitemap.xml' in 'output/robots.txt'
