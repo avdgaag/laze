@@ -8,6 +8,7 @@ begin
         end
 
         def content
+          return super unless Secretary.current.options[:minify_css]
           @minified_content = begin
             Laze.info "Minifying #{filename}"
             ::CSSMin.minify(super)

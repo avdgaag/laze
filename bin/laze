@@ -23,6 +23,11 @@ OptionParser.new do |opts|
   opts.on '-d', '--domain [URL]', 'Domain name for this site' do |url|
     options[:domain] = url
   end
+
+  opts.on '-m', '--minify', 'Enable minification for .js and .css files' do
+    options[:minify_js] = true
+    options[:minify_css] = true
+  end
 end.parse!
 
 Laze::Secretary.new(options).run

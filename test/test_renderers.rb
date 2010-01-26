@@ -5,6 +5,7 @@ class TestRenderers < Test::Unit::TestCase
   context "stylesheets" do
     setup do
       @stylesheet = Stylesheet.new({ :filename => 'test' }, 'foo')
+      Secretary.new
     end
 
     should "not create without stylesheet" do
@@ -22,6 +23,7 @@ class TestRenderers < Test::Unit::TestCase
   context "javascripts" do
     setup do
       @javascript = Javascript.new({ :filename => 'test' }, 'foo')
+      Secretary.new
     end
 
     should "not create without javascript" do

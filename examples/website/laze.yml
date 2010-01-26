@@ -1,4 +1,3 @@
-input: input
-output: output
-layouts: layouts
-includes: includes
+directory: output
+minify_css: false
+minify_js: false

@@ -14,15 +14,27 @@ module Laze
       # Since there should only be a singe secretary object, we let the
       # singleton class keep track of the current instance.
       attr_accessor :current
+
+      def site_config
+        if File.exists?('laze.yml')
+          Laze.debug 'Reading laze.yml'
+          YAML.load_file('laze.yml').symbolize_keys
+        else
+          Laze.info 'No laze.yml file found; using defaults.'
+          {}
+        end
+      end
     end
 
     def initialize(options = {}) #:nodoc:
       default_options = {
-        :store     => :filesystem,
-        :target    => :filesystem,
-        :directory => 'output'
+        :store      => :filesystem,
+        :target     => :filesystem,
+        :directory  => 'output',
+        :minify_js  => false,
+        :minify_css => false
       }
-      @options = default_options.merge(options)
+      @options = default_options.merge(self.class.site_config).merge(options)
       Secretary.current = self
     end
 
