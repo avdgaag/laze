@@ -57,3 +57,10 @@ Feature: Create sites
     When I run laze
     Then the output directory should exist
     And I should see 'foo' in 'output/base.js'
+
+  Scenario: XML Sitemaps
+    Given I have an 'input/test.html' file that contains 'foo'
+    When I run laze
+    Then the output directory should exist
+    And I should see 'foo' in 'output/test.html'
+    And I should see 'test.html' in 'output/sitemap.xml'

@@ -43,10 +43,10 @@ module Laze
   # A plugin should be stored in /plugins, where it is automatically loaded.
   module Plugins
     # Loop over all available plugins, yielding each.
-    def self.each # :yields: module
+    def self.each(for_kind = nil) # :yields: module
       constants.each do |c|
         const = Laze::Plugins.const_get(c)
-        yield const if const.is_a?(Module)
+        yield const if const.is_a?(Module) && (for_kind.nil? || const.applies_to?(for_kind))
       end
     end
   end

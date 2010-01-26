@@ -38,10 +38,13 @@ module Laze
 
     # Run laze to build the output website.
     def run
+      Laze.debug 'Starting source processing'
       store.each do |item|
         target.create item
       end
-      Laze.info 'Done!'
+      target.save
+      Laze.debug 'Source processing ready'
     end
+
   end
 end

@@ -15,9 +15,12 @@ module Laze
       def create(item)
         case item
         when Page, Asset: create_page(item)
-        when Stylesheet, Javascript: create_file(item)
         when Section: create_section(item)
         end
+      end
+
+      def save
+        # already done...
       end
 
     private

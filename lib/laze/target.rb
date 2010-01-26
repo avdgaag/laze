@@ -28,6 +28,12 @@ module Laze
 
     def initialize #:nodoc:
       Laze.debug "Initialized #{self.class.name}"
+      Laze::Plugins.each(:target) { |plugin| extend plugin }
+    end
+
+    # Finalize the generation and process any after hooks.
+    def save
+      raise 'This is a generic target. Please use a subclass.'
     end
 
     # Given an item this will create the output file in the right output
