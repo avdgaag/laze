@@ -49,6 +49,7 @@ end
 
 # Internal requires
 require 'laze/core_extensions'
+require 'laze/plugins'
 require 'laze/item'
 require 'laze/page'
 require 'laze/asset'
