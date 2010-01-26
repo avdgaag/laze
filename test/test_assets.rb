@@ -16,10 +16,12 @@ class TestAssets < Test::Unit::TestCase
 
   context "stylesheet" do
     setup do
-      @stylesheet = Stylesheet.new({ :filename => 'base.less' }, 'foo')
+      @less_stylesheet = Stylesheet.new({ :filename => 'base.less' }, 'foo')
+      @stylesheet      = Stylesheet.new({ :filename => 'base.css' }, 'foo')
     end
 
     should "convert the filename to css" do
+      assert_equal('base.css', @less_stylesheet.filename)
       assert_equal('base.css', @stylesheet.filename)
     end
   end

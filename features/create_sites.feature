@@ -46,6 +46,12 @@ Feature: Create sites
     Then the output directory should exist
     And I should see 'foo' in 'output/base.css'
 
+  Scenario: LESS files
+    Given I have an 'input/base.less' file that contains '#foo { width: 1+1; }'
+    When I run laze
+    Then the output directory should exist
+    And I should see '#foo \{ width: 2; \}' in 'output/base.css'
+
   Scenario: Javascript files
     Given I have an 'input/base.js' file that contains 'foo'
     When I run laze

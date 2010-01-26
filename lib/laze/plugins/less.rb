@@ -8,7 +8,9 @@ begin
         end
 
         def content
-          ::Less.parse(super)
+          content = super
+          content = ::Less.parse(content) if properties[:filename] =~ /\.less$/
+          content
         end
 
         def filename
