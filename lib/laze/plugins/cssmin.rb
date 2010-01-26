@@ -4,13 +4,13 @@ begin
     module Plugins #:nodoc:
       module Cssmin
         def self.applies_to?(kind) #:nodoc:
-          kind == :stylesheet
+          kind == 'Laze::Renderers::StylesheetRenderer'
         end
 
-        def content
+        def render(locals = {})
           return super unless Secretary.current.options[:minify_css]
           @minified_content = begin
-            Laze.info "Minifying #{filename}"
+            Laze.info "Minifying #{options[:locals][:filename]}"
             ::CSSMin.minify(super)
           end
         end

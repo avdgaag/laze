@@ -23,6 +23,9 @@ module Laze
         @string = item_or_string
         @options = { :locals => options }
       end
+
+      # Add plugins
+      Plugins.each(self.class.to_s) { |p| extend p }
     end
 
     # Convert the item to a string to be output to the deployment target.

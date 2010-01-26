@@ -48,7 +48,7 @@ class TestRenderer < Test::Unit::TestCase
     end
 
     should "take extra locals" do
-      Renderers::PageRenderer.any_instance.expects(:liquify).with("layout: <p>bar</p>\n", { :layout => 'foo', :title => 'bla' })
+      Renderers::PageRenderer.any_instance.expects(:liquify).with("layout: <p>bar</p>\n", { :layout => 'foo', :title => 'bla' }).returns('foo')
       Renderer.render(@page, :title => 'bla')
     end
   end

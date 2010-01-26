@@ -8,7 +8,6 @@ module Laze
         super
       end
 
-      # TODO: minify, cache busters, validation, check images, etc.
       def render(locals = {})
         string
       end

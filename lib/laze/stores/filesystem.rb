@@ -44,9 +44,11 @@ module Laze
           # Get current entry path
           full_path = File.join(path, filename)
 
+          relative_path = File.dirname(full_path.sub(File.join(@root, 'input/'), ''))
+
           if File.file?(full_path)
             Laze.debug "Processing file #{path}"
-            file = FileWithMetadata.new(File.read(full_path), { :filename => filename })
+            file = FileWithMetadata.new(File.read(full_path), { :filename => filename, :path => relative_path })
             yield case File.extname(filename)
             when /\.(css|less)/: file.to_stylesheet
             when '.js': file.to_javascript

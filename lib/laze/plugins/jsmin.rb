@@ -4,13 +4,13 @@ begin
     module Plugins #:nodoc:
       module Jsmin
         def self.applies_to?(kind) #:nodoc:
-          kind == :javascript
+          kind == 'Laze::Renderers::StylesheetRenderer'
         end
 
-        def content
+        def render(locals = {})
           return super unless Secretary.current.options[:minify_js]
           @minified_content = begin
-            Laze.info "Minifying #{filename}"
+            Laze.info "Minifying #{options[:locals][:filename]}"
             ::JSMin.minify(super)
           end
         end
