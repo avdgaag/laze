@@ -10,12 +10,6 @@ module Laze
     # Other item that has this item as one of its subitems.
     attr_accessor :parent
 
-    def self.include_plugins(kind)
-      Laze::Plugins.each do |plugin|
-        include plugin if plugin.applies_to?(kind)
-      end
-    end
-
     # New items should be created with a hash of options:
     #
     #   Item.new :title => 'Foo'
@@ -50,6 +44,14 @@ module Laze
 
     def inspect #:nodoc:
       "#<#{self.class}:0x#{self.object_id.to_s(16)} #{filename}>"
+    end
+
+  protected
+
+    def self.include_plugins(kind)
+      Laze::Plugins.each do |plugin|
+        include plugin if plugin.applies_to?(kind)
+      end
     end
   end
 end
