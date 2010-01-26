@@ -3,7 +3,7 @@ module Laze
     include Enumerable
 
     def initialize(properties)
-      super(properties)
+      super(properties, nil)
       @items = []
     end
 

@@ -48,12 +48,18 @@ module Laze
 
           if File.file?(full_path)
             Laze.debug "Processing file #{path}"
-            file = FileWithMetadata.new(File.read(full_path), { :filename => filename, :path => relative_path })
+            file_content = File.read(full_path)
+            file = FileWithMetadata.new(file_content, { :filename => filename, :path => relative_path })
             yield case File.extname(filename)
             when /\.(css|less)/: file.to_stylesheet
             when '.js': file.to_javascript
             else
-              file.to_page
+              if file_content =~ /---/
+                file.to_page
+              else
+                # just copy over without modification
+                file.to_item
+              end
             end
 
           elsif File.directory?(full_path)
@@ -81,6 +87,10 @@ module Laze
 
         def has?(key)
           properties.has_key?(key)
+        end
+
+        def to_item
+          Item.new(properties, content)
         end
 
         def to_page

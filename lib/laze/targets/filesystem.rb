@@ -16,6 +16,7 @@ module Laze
         case item
         when Page, Asset: create_page(item)
         when Section: create_section(item)
+        when Item: copy_file(item)
         end
       end
 
@@ -24,6 +25,10 @@ module Laze
       end
 
     private
+
+      def copy_file(item)
+        File.open(File.join(output_dir, item.properties[:path], item.properties[:filename]), 'w') { |f| f.write item.content }
+      end
 
       def create_page(item)
         File.open(dir(item), 'w') { |f| f.write Renderer.render(item) }

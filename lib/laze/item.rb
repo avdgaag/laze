@@ -10,12 +10,15 @@ module Laze
     # Other item that has this item as one of its subitems.
     attr_accessor :parent
 
+    # Contents of the file
+    attr_accessor :content
+
     # New items should be created with a hash of options:
     #
     #   Item.new :title => 'Foo'
     #
-    def initialize(properties)
-      @properties, @parent = properties, nil
+    def initialize(properties, content)
+      @properties, @content, @parent = properties, content, nil
     end
 
     # Test if this item has a given property.

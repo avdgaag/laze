@@ -73,14 +73,6 @@ module Laze
     # this case we can preserve whitespace indents.
     SINGLE_LINE_YIELD = /^(\s+)#{YIELD}\s*$/
 
-    # Textual content of the layout.
-    attr_accessor :content
-
-    def initialize(properties, content) #:nodoc:
-      @content = content
-      super(properties)
-    end
-
     # Apply this layout to a piece of text, returning this layout's content
     # with the +YIELD+ replacd with the given string.
     #

@@ -2,13 +2,6 @@ module Laze
   # A special kind of Item aimed at HTML files (could be files ending in
   # html, htm, md, mkd, mdn, markdown or liquid).
   class Page < Item
-    attr_accessor :content
-
-    def initialize(properties, content)
-      @content = content
-      super(properties)
-    end
-
     # Convert this page's content to HTML using a text filter. You can set
     # the text filter to use with a property +text_filter+.
     #
