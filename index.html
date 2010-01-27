@@ -13,6 +13,10 @@
             p, h1, h2, h3, h4, h5, h6, ul, ol, dl, table, pre {
                 margin: 18px 0;
             }
+            ul, ol, dl {
+                margin: 18px 0;
+                padding: 0;
+            }
             header, footer, article, nav, hgroup {
                 display: block;
                 position: relative;
@@ -74,7 +78,7 @@
                 text-align: left;
                 margin: 36px auto;
                 width: 600px;
-                padding: 36px;
+                padding: 54px;
                 -webkit-border-radius: 5px;
                 -moz-border-radius: 5px;
                 border-radius: 5px;
@@ -86,6 +90,23 @@
                 border-top: 1px solid #ddd;
                 color: #666;
                 font-size: 11px;
+            }
+            mark {
+                background-color: #ffffe1;
+                color: #111;
+            }
+            mark.warning {
+                background-color: #ffe1e1;
+                color: #900;
+                padding: 2px;
+            }
+            article h2 {
+                margin: 36px 0 -9px;
+                padding-bottom: 9px;
+                border-bottom: 1px dotted #ccc;
+            }
+            article h3 {
+                color: #666;
             }
         </style>
     </head>
@@ -106,16 +127,101 @@
                 </nav>
             </header>
             <article>
-                <p class="leader">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <h3>Lorem ipsum</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <pre><code>function test() {
-    alert('baaah');
-}</code></pre>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <h3>Lorem ipsum</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <p class="leader">Laze is a simple static website generator, inspired by the likes of jekyll, bonsai, nanoc, webby and many others. It&#8216;s main purpose is to <mark>convert a bunch of text files into a working website</mark>.</p>
+                <p><mark class="warning">Laze is currently in development. Use at your own risk.</mark></p>
+                <h2>Getting started</h2>
+                <h3>Installation</h3>
+                <p>This project has not yet been released as a Ruby gem. For now, <mark>install it by cloning its git repository</mark> or downloading the source from its github project page. Copy all source files to some location on your hard drive. Then you can run Laze like so:</p>
+                <pre>/path/to/laze/bin/laze</pre>
+                <p>&#8230;where <code>/path/to/laze</code> is where you saved Laze on your disk.</p>
+                <h3>Usage</h3>
+                <p>You run Laze from the command line in your project directory. Run <code>laze --help</code> for more information.</p>
+                <h2>About</h2>
+                <h3>Why use a static site generator?</h3>
+                <p>A static site generator can help you automate some of the processes used when creating static websites. It is not a Content Management System, it is just a way to <mark>transform simple text files into web pages</mark>.</p>
+                <p>Static site generators usually use separate files for HTML boilerplate code, like a header and footer, and the actual content of the site, like its text pages. Laze is no different.</p>
+                <p>Then, by running Laze you apply the boilerplate code to your content files and transform them into HTML files. This has several benefits:</p>
+                <ul>
+                    <li>Consistent page layouts</li>
+                    <li>DRY: change the lay-out of many pages by changing a single layout file</li>
+                    <li>Transformations: write content using Markdown or another text filter</li>
+                    <li>Secure: since the output is only static HTML files, there are no moving parts on your server. There are no server errors and no security attacks.</li>
+                    <li>Fast: again, without moving parts on the server, your website will be the quickest it can ever be.</li>
+                </ul>
+                <p>Laze adds some other tricks to make creating websites a little easier.</p>
+                <p><strong>Note</strong>: because there are no moving parts on your web server, but only static HTML files, it is tricky to set up dynamic features such as a contact form or a weblog commenting system. Be sure to weigh your options carefully.</p>
+                <h3>Why use Laze?</h3>
+                <p>The main reason for using Laze to generate your sites is that it makes your website easy to maintain, easy to develop and because <mark>it optimizes your website for you</mark>.</p>
+                <p>Various plugin, included by default, help you create a great website:</p>
+                <ul>
+                    <li>Check for missing images in your stylesheets</li>
+                    <li>Use Less CSS to write better CSS</li>
+                    <li>Automatically minify CSS and Javascript code</li>
+                    <li>Automatically concatenate CSS and Javascript files to reduce HTTP requests</li>
+                    <li>Automatically generate sitemaps for your site</li>
+                </ul>
+                <p>The notable downside of Laze is that it does not help you generate a blog. That is not to say that you cannot blog using Laze, just that Laze (currently) has no specific tools for that task.</p>
+                <h2>Project setup</h2>
+                <p>A typical Laze project looks like this:</p>
+                <pre>[project root directory]
+  |- input
+  |  `- index.html
+  |- layouts
+  |  `- default.html
+  |- includes
+  `- output</pre>
+                <p>The input directory holds all your content. Your final website will be generated in the output directory. The end result will look very much like what&#8216;s in the input directory.</p>
+                <p>The layouts directory holds files that can be wrapped around your content files. The includes directory holds files that any content file can include somewhere on its page.</p>
+                <h3>Transformation</h3>
+                <p>Here&#8216;s the transformation process:</p>
+                <ol>
+                    <li>Scan the input directory for all files and directories.</li>
+                    <li>Copy everything from /input over to /output&#8230;</li>
+                    <li>&#8230;but when the file is an HTML page, apply a text filter and layout to it</li>
+                    <li>&#8230;and when the file is a CSS file, expand and minify it</li>
+                    <li>&#8230;and when the file is a Javascript file, concatenate and minify it</li>
+                </ol>
+                <h3>More information</h3>
+                <ul>
+                    <li>Liquid is supported in all HTML files (<a href="http://www.liquidmarkup.org">www.liquidmarkup.org</a>)</li>
+                    <li>Less is supported in all CSS files ending in +.less+ (<a href="http://lesscss.org">lesscss.org</a>/)</li>
+                    <li>Markdown is supported in all HTML files (<a href="http://daringfireball.net/projects/markdown">daringfireball.net/projects/markdown</a>/)</li>
+                    <li>pngcrush (<a href="http://pmt.sourceforge.net/pngcrush">pmt.sourceforge.net/pngcrush</a>/) and jpegtran (<a href="http://jpegclub.org">jpegclub.org</a>/) are used to optimize images.</li>
+                </ul>
+                <p>Furthermore, Laze depends on the following third-party Ruby gems:</p>
+                <ul>
+                    <li>liquid</li>
+                    <li>rdiscount</li>
+                    <li>redcloth</li>
+                </ul>
+                <p>It could optionally use the following Ruby gems:</p>
+                <ul>
+                    <li>jsmin</li>
+                    <li>cssmin</li>
+                    <li>directory_watcher</li>
+                    <li>webrick</li>
+                    <li>less</li>
+                </ul>
+                <h2>Bugs, issues and to do&rsquo;s</h2>
+                <p>There is still a lot to do. Please file bug reports or feature requests at <a href="http://github.com/avdgaag/laze">the github project site</a>.</p>
+                <h2>Credits</h2>
+                <table>
+                    <tr><td valign="top">Author:</td><td>Arjan van der Gaag</td></tr>
+                    <tr><td valign="top">E-mail:</td><td>arjan@arjanvandergaag.nl</td></tr>
+                    <tr><td valign="top">Website:</td><td><a href="http://avdgaag.github.com">avdgaag.github.com</a></td></tr>
+                    <tr><td valign="top">Project website:</td><td><a href="http://avdgaag.github.com/laze">avdgaag.github.com/laze</a></td></tr>
+                    <tr><td valign="top">Project documentation:</td><td><a href="http:://avdgaag.github.com/laze/rdoc">avdgaag.github.com/laze/rdoc</a></td></tr>
+                    <tr><td valign="top">Project source:</td><td><a href="http://github.com/avdgaag/laze">github.com/avdgaag/laze</a></td></tr>
+                </table>
+                <h2>Contribute</h2>
+                <p>Community contributions are welcomed:</p>
+                <ol>
+                    <li>Fork the project.</li>
+                    <li>Make your feature addition or bug fix.</li>
+                    <li>Add tests for it. This is important so I don&#8216;t break it in a future version unintentionally.</li>
+                    <li>Commit, do not mess with rakefile, version, or history. (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)</li>
+                    <li>Send me a pull request. Bonus points for topic branches.</li>
+                </ol>
             </article>
             <footer>
                 <p>&copy; copyright 2010 <a href="http://arjanvandergaag.nl/" title="Go to my personal website" rel="external me">Arjan van der Gaag</a>. Released under a MIT license.</p>
