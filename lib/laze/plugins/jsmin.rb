@@ -4,7 +4,7 @@ begin
     module Plugins #:nodoc:
       module Jsmin
         def self.applies_to?(kind) #:nodoc:
-          kind == 'Laze::Renderers::StylesheetRenderer'
+          kind == 'Laze::Renderers::JavascriptRenderer'
         end
 
         def render(locals = {})

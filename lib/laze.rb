@@ -19,7 +19,7 @@ rescue LoadError
 end
 
 module Laze #:nodoc:
-  LOGGER = Logger.new(STDERR)
+  LOGGER = Logger.new('test.log')
   LOGGER.level = Logger::DEBUG
   LOGGER.datetime_format = "%H:%M:%S"
 

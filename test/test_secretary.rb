@@ -8,7 +8,7 @@ class TestSecretary < Test::Unit::TestCase
     end
   end
 
-  context 'creation' do
+  context 'creation withouth laze.yml' do
     setup do
       @s = Secretary.new({})
     end
@@ -28,4 +28,21 @@ class TestSecretary < Test::Unit::TestCase
       2.times { assert_instance_of(Stores::Filesystem, @s.store) }
     end
   end
+
+  context "creation with laze.yml" do
+    setup do
+      File.expects(:exists?).with('laze.yml').returns(true)
+      YAML.expects(:load_file).with('laze.yml').returns({ :store => 'foo', :target => 'foo' })
+      @s = Secretary.new({ :target => 'bar' })
+    end
+
+    should "override defaults with yaml settings" do
+      assert_equal('foo', @s.options[:store])
+    end
+
+    should "override yaml settings with inline options" do
+      assert_equal('bar', @s.options[:target])
+    end
+  end
+
 end

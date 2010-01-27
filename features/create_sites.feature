@@ -34,7 +34,7 @@ Feature: Create sites
 
   Scenario: Basic site with includes
     Given I have a includes directory
-    And I have an 'input/index.html' file that contains 'Included: {% include \'foo\' %}'
+    And I have an 'input/index.html' file that contains "Included: {% include 'foo' %}"
     And I have an 'includes/foo.html' file that contains 'foo'
     When I run laze
     Then the output directory should exist

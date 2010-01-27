@@ -26,6 +26,7 @@ module Laze
       end
 
       def read_template_file(include_name, from_dir = INCLUDES_DIR)
+        Laze.debug "Reading template file #{include_name}"
         raise FileSystemException, "Illegal filename '#{include_name}'" unless include_name =~ /^[^.\/][a-zA-Z0-9_\/]+$/
         full_path = File.join(@root, from_dir, "#{include_name}.html")
         raise FileSystemException, "Illegal template path '#{File.expand_path(full_path)}'" unless File.expand_path(full_path) =~ /^#{File.expand_path(@root)}/
@@ -44,17 +45,15 @@ module Laze
           # Get current entry path
           full_path = File.join(path, filename)
 
-          relative_path = File.dirname(full_path.sub(File.join(@root, 'input/'), ''))
-
           if File.file?(full_path)
-            Laze.debug "Processing file #{path}"
+            relative_path = File.dirname(full_path.sub(File.join(@root, 'input/'), ''))
             file_content = File.read(full_path)
             file = FileWithMetadata.new(file_content, { :filename => filename, :path => relative_path })
             yield case File.extname(filename)
             when /\.(css|less)/: file.to_stylesheet
             when '.js': file.to_javascript
             else
-              if file_content =~ /---/
+              if file_content =~ /---|\{%.+%\}|\{\{.+\}\}/
                 file.to_page
               else
                 # just copy over without modification

@@ -9,6 +9,10 @@ module Laze
 
     @targets = []
 
+    # The base directory to create all the files in. This is relative
+    # the location where laze is run from.
+    attr_reader :output_dir
+
     # Find a target deployment engine by name and return its class.
     #
     # When loading <tt>Laze::Targets::Filesystem</tt> you would call:
@@ -26,7 +30,9 @@ module Laze
       @targets << child
     end
 
-    def initialize #:nodoc:
+    def initialize(output_dir) #:nodoc:
+      @output_dir = output_dir
+      reset
       Laze.debug "Initialized #{self.class.name}"
       Laze::Plugins.each(:target) { |plugin| extend plugin }
     end
@@ -40,6 +46,15 @@ module Laze
     # location.
     def create(item)
       raise 'This is a generic target. Please use a subclass.'
+    end
+
+  protected
+
+    # Empty the current output directory
+    def reset
+      FileUtils.rm_rf(output_dir) if File.directory?(output_dir)
+      FileUtils.mkdir(output_dir) unless File.directory?(output_dir)
+      Laze.debug "Emptied output directory #{output_dir}"
     end
   end
 end

@@ -1,15 +1,6 @@
 module Laze
   module Targets #:nodoc:
     class Filesystem < Target
-      # The base directory to create all the files in. This is relative
-      # the location where laze is run from.
-      attr_reader :output_dir
-
-      def initialize(output_dir)
-        @output_dir = output_dir
-        reset
-        super()
-      end
 
       # Manifest an item -- write it to disk
       def create(item)
@@ -37,13 +28,6 @@ module Laze
       def create_section(item)
         FileUtils.mkdir(dir(item))
         item.each { |subitem| create(subitem) }
-      end
-
-      # Empty the current output directory
-      def reset
-        FileUtils.rm_rf(output_dir)
-        FileUtils.mkdir(output_dir)
-        Laze.debug "Emptied output directory"
       end
 
       # Get the correct path for a given item.

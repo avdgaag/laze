@@ -35,7 +35,23 @@ class TestRenderer < Test::Unit::TestCase
     end
   end
 
-  context "when rendering" do
+  should "render a stylesheet" do
+    s = Stylesheet.new({ :filename => 'foo.css' }, 'foo')
+    x = Renderers::StylesheetRenderer.new(s)
+    x.expects(:render).returns('foo')
+    Renderers::StylesheetRenderer.expects(:new).at_least_once.returns(x)
+    Renderer.render(s)
+  end
+
+  should "render a javascript" do
+    s = Javascript.new({ :filename => 'foo.js' }, 'foo')
+    x = Renderers::JavascriptRenderer.new(s)
+    x.expects(:render).returns('foo')
+    Renderers::JavascriptRenderer.expects(:new).at_least_once.returns(x)
+    Renderer.render(s)
+  end
+
+  context "when rendering a page" do
     setup do
       @page = Page.new({ :layout => 'foo' }, 'bar')
       @layout = Layout.new({}, 'layout: {{ yield }}')

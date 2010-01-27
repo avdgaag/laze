@@ -8,7 +8,7 @@ module Laze
       def render(locals = {})
         Laze.info("Adding cache busters to #{options[:locals][:filename]}")
         [ /((?:href|src)=(?:'|"))(.+\.(?:css|js))("|')/,
-          /(url\([\s"']*)([^\)"'\s]*)([\s"']*\))/m
+          /(url\([\s"']*)([^\)"'\s]*\.(?:png|gif|jpg))([\s"']*\))/m
         ].inject(super) do |output, regex|
           output.gsub(regex) do |match|
             filename = File.expand_path(File.join('input', options[:locals][:path], $2))

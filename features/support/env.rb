@@ -10,7 +10,8 @@ TEST_DIR    = File.join(ENV['PWD'], 'tmp')
 LAZE_PATH = File.join(ENV['PWD'], 'bin', 'laze')
 
 def run_laze(options = {})
-  command = LAZE_PATH
+  command = LAZE_PATH.dup
+  command << ' -m' if options[:minify]
   command << ' >> /dev/null 2>&1' if options[:debug].nil?
   system command
 end
