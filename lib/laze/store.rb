@@ -23,12 +23,10 @@ module Laze
     end
 
     def self.inherited(child) #:nodoc:
-      Laze.debug "Registering store #{child}"
       @stores << child
     end
 
     def initialize #:nodoc:
-      Laze.debug "Initialized #{self.class.name}"
       Liquid::Template.file_system = self
     end
 

@@ -17,10 +17,8 @@ module Laze
 
       def site_config
         if File.exists?('laze.yml')
-          Laze.debug 'Reading laze.yml'
           YAML.load_file('laze.yml').symbolize_keys
         else
-          Laze.info 'No laze.yml file found; using defaults.'
           {}
         end
       end
@@ -30,17 +28,27 @@ module Laze
       default_options = {
         :store      => :filesystem,
         :target     => :filesystem,
+        :source     => '.',
         :directory  => 'output',
         :minify_js  => false,
-        :minify_css => false
+        :minify_css => false,
+        :loglevel   => :warn,
+        :logfile    => 'stderr'
       }
       @options = default_options.merge(self.class.site_config).merge(options)
+
+      # Set the logger options
+      logger = Logger.new((@options[:logfile] == 'stderr' ? STDERR : @options[:logfile]))
+      logger.level = Logger.const_get(@options[:loglevel].to_s.upcase)
+      logger.datetime_format = "%H:%M:%S"
+      Laze.const_set('LOGGER', logger)
+
       Secretary.current = self
     end
 
     # The current storage engine.
     def store
-      @store ||= Store.find(options[:store]).new
+      @store ||= Store.find(options[:store]).new(options[:source])
     end
 
     # The current target deployment engine.
@@ -51,6 +59,7 @@ module Laze
     # Run laze to build the output website.
     def run
       Laze.debug 'Starting source processing'
+      target.reset
       store.each do |item|
         target.create item
       end

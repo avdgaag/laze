@@ -3,31 +3,124 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 help = <<HELP
 Laze is a simple static website manager.
-
-Basic command line usage:
+USAGE: laze [-admflvh] [target_dir] [source_dir]
 HELP
 
-require 'optparse'
 require 'laze'
+require 'optparse'
 
 options = {}
 
-OptionParser.new do |opts|
+o = OptionParser.new do |opts|
   opts.banner = help
+  opts.separator ''
+  opts.separator 'Specify configuration in ./laze.yml or ovverride using these options:'
+
+  opts.on '-d', '--domain [URL]', 'Domain name for this site' do |url|
+    options[:domain] = url
+  end
+
+  opts.on '-s', '--[no-]server', 'Start web server on port 4545' do |s|
+    options[:server] = s
+  end
+
+  opts.on '-a', '--[no-]auto', 'Auto-regenerate the website' do |a|
+    options[:auto] = a
+  end
+
+  opts.on '-m', '--[no-]minify', 'Enable minification for .js and .css files' do |m|
+    options[:minify_js] = m
+    options[:minify_css] = m
+  end
+
+  opts.on '-f', '--logfile FILE', 'Write log messages to a file' do |filename|
+    options[:logfile] = filename
+  end
+
+  opts.on '-l', '--loglevel LEVEL', 'Filter log messages by level' do |level|
+    options[:loglevel] = level
+  end
+
+  opts.separator ''
+  opts.separator 'Common options:'
 
   opts.on '-v', '--version', 'Display current version' do
     puts 'Laze ' + Laze.version
     exit 0
   end
 
-  opts.on '-d', '--domain [URL]', 'Domain name for this site' do |url|
-    options[:domain] = url
+  opts.on_tail('-h', '--help', 'Show this message') do
+    puts opts
+    exit
+  end
+end
+
+begin
+  o.parse!
+rescue OptionParser::InvalidOption => e
+  puts e
+  puts o
+  exit 1
+end
+
+case ARGV.size
+  when 0:
+    # ...
+  when 1:
+    options[:directory] = ARGV[0]
+  when 2:
+    options[:directory] = ARGV[0]
+    options[:source] = ARGV[1]
+  else
+    puts 'Invalid options. Run `laze --help` for more information.'
+    exit 1
+end
+
+secretary = Laze::Secretary.new(options)
+
+if options[:auto]
+  require 'directory_watcher'
+  puts 'Auto-regenerating enabled'
+  dw = DirectoryWatcher.new(secretary.options[:source])
+  dw.interval = 1
+  dw.glob = Dir.chdir(secretary.options[:source]) do
+    dirs = Dir['*'].select { |x| File.directory?(x) }
+    dirs -= [secretary.options[:directory]]
+    dirs = dirs.map { |x| "#{x}/**/*" }
+    dirs += ['*']
   end
 
-  opts.on '-m', '--minify', 'Enable minification for .js and .css files' do
-    options[:minify_js] = true
-    options[:minify_css] = true
-  end
-end.parse!
 
-Laze::Secretary.new(options).run
+  dw.add_observer do |*args|
+    puts "#{args.size} files changed; regenerating..."
+    secretary.run
+  end
+
+  dw.start
+
+  loop { sleep 1000 } unless options[:server]
+else
+  secretary.run
+end
+
+if options[:server]
+  require 'webrick'
+  include WEBrick
+
+  FileUtils.mkdir_p(secretary.options[:directory])
+
+  mime_types = WEBrick::HTTPUtils::DefaultMimeTypes
+  mime_types.store 'js', 'application/javascript'
+
+  s = HTTPServer.new(
+    :Port => 4545,
+    :DocumentRoot => secretary.options[:directory],
+    :MimeTypes => mime_types
+  )
+  t = Thread.new {
+    s.start
+  }
+
+  trap("INT") { s.shutdown }
+  t.join()
+end

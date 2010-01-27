@@ -3,7 +3,7 @@ layout: default
 ---
 # Welcome
 
-Welcome to our awesome website.
+Welcome to our awesome websites!
 {% include 'tagline' %}
 
 ## Lorem ipsum dolor sit amet...

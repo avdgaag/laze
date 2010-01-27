@@ -26,14 +26,12 @@ module Laze
     end
 
     def self.inherited(child) #:nodoc:
-      Laze.debug "Registering target #{child}"
       @targets << child
     end
 
     def initialize(output_dir) #:nodoc:
       @output_dir = output_dir
       reset
-      Laze.debug "Initialized #{self.class.name}"
       Laze::Plugins.each(:target) { |plugin| extend plugin }
     end
 
@@ -47,8 +45,6 @@ module Laze
     def create(item)
       raise 'This is a generic target. Please use a subclass.'
     end
-
-  protected
 
     # Empty the current output directory
     def reset
