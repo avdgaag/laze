@@ -1,3 +1,1 @@
-directory: output
-minify_css: false
-minify_js: false
+domain: http://example.com

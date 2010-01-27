@@ -1,1 +1,1 @@
-var hello = 'world';
+var hello = 'Welcome to this awesome page.';

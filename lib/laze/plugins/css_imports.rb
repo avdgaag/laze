@@ -19,7 +19,7 @@ module Laze #:nodoc:
 
       def expand_css(content, filename)
         Laze.info("Expanding imports in #{filename}")
-        content.gsub!(/@import\s*url\(\s*('|")?\s*(.+)\s*\1?\s*\);?/) do |match|
+        content.gsub!(/@import\s*url\(\s*('|")?\s*([^'"]+)\s*\1?\s*\);?/) do |match|
           referenced_file = File.expand_path(File.join(File.dirname(filename), $2))
           if File.exists?(referenced_file)
             "/* #{match} */\n" + expand_css(File.read(referenced_file), referenced_file)
