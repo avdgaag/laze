@@ -1,7 +1,12 @@
-module Laze
-  module Plugins
+module Laze #:nodoc:
+  module Plugins #:nodoc:
+    # This plugin will replace any import statements in your stylesheets with
+    # the actual contents of the referenced files. This reduces the number
+    # of HTTP requests and speeds up your website loading time.
+    #
+    # This plugin is a decorator for Target and fires before Target#save.
     module CssImports
-      def self.applies_to?(kind)
+      def self.applies_to?(kind) #:nodoc:
         kind == :target
       end
 

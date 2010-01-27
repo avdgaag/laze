@@ -2,6 +2,15 @@ begin
   require 'jsmin'
   module Laze #:nodoc:
     module Plugins #:nodoc:
+      # This plugin uses the jsmin gem to minify your javascript files
+      # and thereby reduce your website's bandwidth usage.
+      #
+      # This plugin is a decorator for JavascriptRenderer and fires after
+      # JavascriptRenderer#render.
+      #
+      # *Note*: when the jsmin gem is unavailable this plugin will quietly
+      # fail, leaving the .js files untouched and generating a warning in the
+      # logs.
       module Jsmin
         def self.applies_to?(kind) #:nodoc:
           kind == 'Laze::Renderers::JavascriptRenderer'

@@ -1,7 +1,13 @@
-module Laze
-  module Plugins
+module Laze #:nodoc:
+  module Plugins #:nodoc:
+    # This plugin creates a very simple robots.txt file with a reference
+    # to the sitemap.
+    #--
+    # TODO: check to make sure there is not already a robots.txt
+    # TODO: auto-build the file based on properties in the pages.
     module Robots
-      def self.applies_to?(kind)
+      # This plugin is a decorator for Target and fires before Target#save.
+      def self.applies_to?(kind) #:nodoc:
         kind == :target
       end
 

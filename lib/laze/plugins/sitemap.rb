@@ -1,10 +1,21 @@
 begin
   require 'builder'
   require 'zlib'
-  module Laze
-    module Plugins
+  module Laze  #:nodoc:
+    module Plugins #:nodoc:
+      # This plugin will generate a sitemap for your website after it has been
+      # generated. It will scan for all HTML files in your output directory
+      # and will collect these in a sitemap.xml file.
+      #
+      # This plugin will also create a gzipped sitemap in sitemap.xml.gz.
+      #
+      # This plugin is a decorator for Target and fires before Target#save.
+      #
+      # *Note*: when the builder or zlib gems are unavailable this plugin will
+      # quietly fail, generating no sitemap files and generating a warning in
+      # the logs.
       module Sitemap
-        def self.applies_to?(kind)
+        def self.applies_to?(kind) #:nodoc:
           kind == :target
         end
 

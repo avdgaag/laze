@@ -1,8 +1,7 @@
 module Laze
   # An item is a basic node in a site. It is usually not used directly, but
-  # only through one of its subclasses, like Page or Section. An item
-  # is a basic container of properties and holds some general-purpose and
-  # shared methods for its subclasses.
+  # only through one of its subclasses, like Page or Section. An item is used
+  # as a generic container for static files, such as images.
   class Item
     # Hash of proprties, like page title or output filename.
     attr_accessor :properties
@@ -51,7 +50,7 @@ module Laze
 
   protected
 
-    def self.include_plugins(kind)
+    def self.include_plugins(kind) #:nodoc:
       Laze::Plugins.each do |plugin|
         include plugin if plugin.applies_to?(kind)
       end

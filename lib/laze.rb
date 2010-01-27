@@ -20,19 +20,19 @@ end
 
 module Laze #:nodoc:
   def debug(msg)
-    LOGGER.debug(msg)
+    LOGGER.debug(msg) if const_defined?('LOGGER')
   end
 
   def warn(msg)
-    LOGGER.warn(msg)
+    LOGGER.warn(msg) if const_defined?('LOGGER')
   end
 
   def info(msg)
-    LOGGER.info(msg)
+    LOGGER.info(msg) if const_defined?('LOGGER')
   end
 
   def fatal(msg)
-    LOGGER.fatal(msg)
+    LOGGER.fatal(msg) if const_defined?('LOGGER')
   end
 
   def self.version

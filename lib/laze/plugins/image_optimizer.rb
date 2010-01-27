@@ -1,7 +1,12 @@
-module Laze
-  module Plugins
+module Laze #:nodoc:
+  module Plugins #:nodoc:
+    # This plugin tries to optimize the images in your website.
+    # You will need to have +pngcrush+ and +jpegtran+ installed on your
+    # system for this plugin to work. If not, it will fail silently.
+    #
+    # This plugin is a decorator for Target and fires before Target#save.
     module ImageOptimizer
-      def self.applies_to?(kind)
+      def self.applies_to?(kind) #:nodoc:
         kind == :target
       end
 

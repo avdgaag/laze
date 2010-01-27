@@ -1,5 +1,11 @@
 module Laze #:nodoc:
   module Plugins #:nodoc:
+    # This plugin checks your stylesheets for missing images and spits out
+    # a log warning message when an image file referenced in your
+    # stylesheets could not be found.
+    #
+    # This plugin is a decorator for StylesheetRenderer and fires after
+    # StylesheetRenderer#render.
     module ImageCheck
       def self.applies_to?(kind) #:nodoc:
         kind == 'Laze::Renderers::StylesheetRenderer'

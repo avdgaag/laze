@@ -1,7 +1,33 @@
-module Laze
-  module Plugins
+module Laze #:nodoc:
+  module Plugins #:nodoc:
+    # This plugin introduces the +require+ statement to your javascript files.
+    # This is a simple mechanism to concatenate all your javascript files
+    # into a single library and thereby reduce the number of HTTP requests
+    # (improving your website load time).
+    #
+    # You can include another javascript file with a special comment like so:
+    #
+    #   # foo.js
+    #   var foo = 'foo';
+    #
+    #   # bar.js
+    #   // require 'foo.js'
+    #   alert(foo);
+    #
+    # This will compile into the following file:
+    #
+    #   # bar.js
+    #   var foo = 'foo';
+    #   alert(foo);
+    #
+    # Note that this leaves the original files untouched, so your website
+    # will end up with both files. The point is you only have to reference
+    # the one with that is concatenated.
+    #
+    # This plugin is a decorator for Target and fires before Target#save.
     module JsRequires
-      def self.applies_to?(kind)
+      # This plugin is a decorator for Target and fires before Target#save.
+      def self.applies_to?(kind) #:nodoc:
         kind == :target
       end
 

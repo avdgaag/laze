@@ -15,6 +15,9 @@ module Laze
       # singleton class keep track of the current instance.
       attr_accessor :current
 
+      # Read configuration from the laze.yml file in the current directory.
+      #--
+      # TODO: make sure this reads from the source directory, not the current.
       def site_config
         if File.exists?('laze.yml')
           YAML.load_file('laze.yml').symbolize_keys
@@ -41,7 +44,7 @@ module Laze
       logger = Logger.new((@options[:logfile] == 'stderr' ? STDERR : @options[:logfile]))
       logger.level = Logger.const_get(@options[:loglevel].to_s.upcase)
       logger.datetime_format = "%H:%M:%S"
-      Laze.const_set('LOGGER', logger)
+      Laze.const_set('LOGGER', logger) unless Laze.const_defined?('LOGGER')
 
       Secretary.current = self
     end

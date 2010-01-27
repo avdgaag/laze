@@ -5,13 +5,13 @@ module Laze
     # Convert this page's content to HTML using a text filter. You can set
     # the text filter to use with a property +text_filter+.
     #
-    # Current filters supported are markdown, rdoc and none. Default is
+    # Current filters supported are markdown, textile and none. Default is
     # markdown.
     def filtered_content
       text_filter ? text_filter.new(content).to_html : content
     end
 
-    def filename
+    def filename #:nodoc:
       @filename ||= properties[:filename].sub(/(?:md|mkd|liquid|markdown|htm)$/, 'html')
     end
 
