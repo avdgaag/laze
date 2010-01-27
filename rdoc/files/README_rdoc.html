@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README.rdoc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README.rdoc</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README.rdoc
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Wed Jan 27 11:42:31 +0100 2010</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Laze</h1>
+<p>
+Laze is a simple static website generator, inspired by the likes of jekyll,
+bonsai, nanoc, webby and many others. It&#8216;s main purpose is to convert
+a bunch of text files into a working website.
+</p>
+<p>
+Laze is currently in development. Use at your own risk.
+</p>
+<h2>Installation</h2>
+<p>
+This project has not yet been released as a Ruby gem. For now, install it
+by cloning its git repository or downloading the source from its github
+project page. Copy all source files to some location on your hard drive.
+Then you can run Laze like so:
+</p>
+<pre>
+  /path/to/laze/bin/laze
+</pre>
+<p>
+&#8230;where /path/to/laze is where you saved Laze on your disk.
+</p>
+<h2>Usage</h2>
+<p>
+You run Laze from the command line in your project directory. See <tt>laze
+&#8212;help</tt> for more information.
+</p>
+<h2>Why use a static site generator?</h2>
+<p>
+A static site generator can help you automate some of the processes used
+when creating static websites. It is not a Content Management System, it is
+just a way to transform simple text files into web pages.
+</p>
+<p>
+Static site generators usually use separate files for HTML boilerplate
+code, like a header and footer, and the actual content of the site, like
+its text pages. Laze is no different.
+</p>
+<p>
+Then, by running Laze you apply the boilerplate code to your content files
+and transform them into HTML files. This has several benefits:
+</p>
+<ul>
+<li>Consistent page layouts
+
+</li>
+<li>DRY: change the lay-out of many pages by changing a single layout file
+
+</li>
+<li>Transformations: write content using Markdown or another text filter
+
+</li>
+<li>Secure: since the output is only static HTML files, there are no moving
+parts on your server. There are no server errors and no security attacks.
+
+</li>
+<li>Fast: again, without moving parts on the server, your website will be the
+quickest it can ever be.
+
+</li>
+</ul>
+<p>
+Laze adds some other tricks to make creating websites a little easier.
+</p>
+<p>
+Note: because there are no moving parts on your web server, but only static
+HTML files, it is tricky to set up dynamic features such as a contact form
+or a weblog commenting system. Be sure to weigh your options carefully.
+</p>
+<h2>Why use Laze?</h2>
+<p>
+The main reason for using Laze to generate your sites is that it makes your
+website easy to maintain, easy to develop and because it optimizes your
+website for you.
+</p>
+<p>
+Various plugin, included by default, help you create a great website
+</p>
+<ul>
+<li>Check for missing images in your stylesheets
+
+</li>
+<li>Use Less CSS to write better CSS
+
+</li>
+<li>Automatically minify CSS and Javascript code
+
+</li>
+<li>Automatically concatenate CSS and Javascript files to reduce HTTP requests
+
+</li>
+<li>Automatically generate sitemaps for your site
+
+</li>
+</ul>
+<p>
+The notable downside of Laze is that it does not help you generate a blog.
+That is not to say that you cannot blog using Laze, just that Laze does not
+relieve any pain.
+</p>
+<h2>Project setup</h2>
+<p>
+A typical Laze project looks like this:
+</p>
+<pre>
+  [project root directory]
+   |- input
+   |  `- index.html
+   |- layouts
+   |  `- default.html
+   |- includes
+   `- output
+</pre>
+<p>
+The input directory holds all your content. Your final website will be
+generated in the output directory. The end result will look very much like
+what&#8216;s in the input directory.
+</p>
+<p>
+The layouts directory holds files that can be wrapped around your content
+files. The includes directory holds files that any content file can include
+somewhere on its page.
+</p>
+<h3>Transformation</h3>
+<p>
+Here&#8216;s the transformation process:
+</p>
+<ol>
+<li>Scan the input directory for all files and directories.
+
+</li>
+<li>Copy everything from /input over to /output&#8230;
+
+</li>
+<li>&#8230;but when the file is an HTML page, apply a text filter and layout to
+it
+
+</li>
+<li>&#8230;and when the file is a CSS file, expand and minify it
+
+</li>
+<li>&#8230;and when the file is a Javascript file, concatenate and minify it
+
+</li>
+</ol>
+<h3>More information</h3>
+<ul>
+<li>Liquid is supported in all HTML files (<a
+href="http://www.liquidmarkup.org">www.liquidmarkup.org</a>)
+
+</li>
+<li>Less is supported in all CSS files ending in +.less+ (<a
+href="http://lesscss.org">lesscss.org</a>/)
+
+</li>
+<li>Markdown is supported in all HTML files (<a
+href="http://daringfireball.net/projects/markdown">daringfireball.net/projects/markdown</a>/)
+
+</li>
+<li>pngcrush (<a
+href="http://pmt.sourceforge.net/pngcrush">pmt.sourceforge.net/pngcrush</a>/)
+and jpegtran (<a href="http://jpegclub.org">jpegclub.org</a>/) are used to
+optimize images.
+
+</li>
+</ul>
+<p>
+Furthermore, Laze depends on the following third-party Ruby gems:
+</p>
+<ul>
+<li>liquid
+
+</li>
+<li>rdiscount
+
+</li>
+<li>redcloth
+
+</li>
+</ul>
+<p>
+It could optionally use the following Ruby gems:
+</p>
+<ul>
+<li>jsmin
+
+</li>
+<li>cssmin
+
+</li>
+<li>directory_watcher
+
+</li>
+<li>webrick
+
+</li>
+<li>less
+
+</li>
+</ul>
+<h2>Bugs, issues and to do&#8216;s</h2>
+<p>
+There&#8216;s still a lot to do. Please file bug reports or feature
+requests at the github project site (<a
+href="http://github.com/avdgaag/laze">github.com/avdgaag/laze</a>).
+</p>
+<h2>Credits</h2>
+<table>
+<tr><td valign="top">Author:</td><td>Arjan van der Gaag
+
+</td></tr>
+<tr><td valign="top">E-mail:</td><td>arjan@arjanvandergaag.nl
+
+</td></tr>
+<tr><td valign="top">Website:</td><td><a href="http://avdgaag.github.com">avdgaag.github.com</a>
+
+</td></tr>
+<tr><td valign="top">Project website:</td><td><a href="http://avdgaag.github.com/laze">avdgaag.github.com/laze</a>
+
+</td></tr>
+<tr><td valign="top">Project documentation:</td><td><a
+href="http:://avdgaag.github.com/laze/rdoc">://avdgaag.github.com/laze/rdoc</a>
+
+</td></tr>
+<tr><td valign="top">Project source:</td><td><a href="http://github.com/avdgaag/laze">github.com/avdgaag/laze</a>
+
+</td></tr>
+</table>
+<h2>Note on Patches/Pull Requests</h2>
+<ul>
+<li>Fork the project.
+
+</li>
+<li>Make your feature addition or bug fix.
+
+</li>
+<li>Add tests for it. This is important so I don&#8216;t break it in a future
+version unintentionally.
+
+</li>
+<li>Commit, do not mess with rakefile, version, or history. (if you want to
+have your own version, that is fine but bump version in a commit by itself
+I can ignore when I pull)
+
+</li>
+<li>Send me a pull request. Bonus points for topic branches.
+
+</li>
+</ul>
+<h2>Copyright</h2>
+<p>
+Copyright (c) 2009 Arjan van der Gaag. See LICENSE for details.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
