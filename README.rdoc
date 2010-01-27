@@ -8,14 +8,12 @@ Laze is currently in development. Use at your own risk.
 
 == Installation
 
-This project has not yet been released as a Ruby gem. For now, install it
-by cloning its git repository or downloading the source from its github
-project page. Copy all source files to some location on your hard drive.
-Then you can run Laze like so:
+You can install Laze as a rubygem:
 
-  /path/to/laze/bin/laze
+  gem install laze
 
-...where /path/to/laze is where you saved Laze on your disk.
+You may need to prefix that with <tt>sudo</tt>, depending on your system.
+You should then be able to use <tt>laze</tt> anywhere.
 
 == Usage
 
