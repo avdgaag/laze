@@ -6,12 +6,22 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name        = "laze"
     gem.summary     = %Q{A simple static site manager}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.description = <<-EOF
+      Laze is a simple static website generator, inspired by the likes of
+      jekyll, bonsai, nanoc, webby and many others. It's main purpose is to
+      convert a bunch of text files into a working website.
+    EOF
     gem.email       = "info@agwebdesign.nl"
     gem.homepage    = "http://github.com/avdgaag/laze"
     gem.authors     = ["Arjan van der Gaag"]
-    gem.add_development_dependency "thoughtbot-shoulda", ">= 0"
-    gem.add_dependency('liquid', '>= 1.9.0')
+    gem.add_development_dependency("thoughtbot-shoulda")
+    gem.add_dependency('liquid')
+    gem.add_dependency('rdiscount')
+    gem.add_dependency('RedCloth')
+    gem.add_dependency('jsmin')
+    gem.add_dependency('cssmin')
+    gem.add_dependency('directory_watcher')
+    gem.add_dependency('less')
   end
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
