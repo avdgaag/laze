@@ -1,16 +1,148 @@
-= laze
+= Laze
 
-Description goes here.
+Laze is a simple static website generator, inspired by the likes of jekyll,
+bonsai, nanoc, webby and many others. It's main purpose is to convert a bunch
+of text files into a working website.
+
+Laze is currently in development. Use at your own risk.
+
+== Installation
+
+This project has not yet been released as a Ruby gem. For now, install it
+by cloning its git repository or downloading the source from its github
+project page. Copy all source files to some location on your hard drive.
+Then you can run Laze like so:
+
+  /path/to/laze/bin/laze
+
+...where /path/to/laze is where you saved Laze on your disk.
+
+== Usage
+
+You run Laze from the command line in your project directory. See
+<tt>laze --help</tt> for more information.
+
+== Why use a static site generator?
+
+A static site generator can help you automate some of the processes used when
+creating static websites. It is not a Content Management System, it is just
+a way to transform simple text files into web pages.
+
+Static site generators usually use separate files for HTML boilerplate code,
+like a header and footer, and the actual content of the site, like its text
+pages. Laze is no different.
+
+Then, by running Laze you apply the boilerplate code to your content files
+and transform them into HTML files. This has several benefits:
+
+* Consistent page layouts
+* DRY: change the lay-out of many pages by changing a single layout file
+* Transformations: write content using Markdown or another text filter
+* Secure: since the output is only static HTML files, there are no moving
+  parts on your server. There are no server errors and no security attacks.
+* Fast: again, without moving parts on the server, your website will be
+  the quickest it can ever be.
+
+Laze adds some other tricks to make creating websites a little easier.
+
+Note: because there are no moving parts on your web server, but only static
+HTML files, it is tricky to set up dynamic features such as a contact form
+or a weblog commenting system. Be sure to weigh your options carefully.
+
+== Why use Laze?
+
+The main reason for using Laze to generate your sites is that it makes your
+website easy to maintain, easy to develop and because it optimizes your
+website for you.
+
+Various plugin, included by default, help you create a great website
+
+* Check for missing images in your stylesheets
+* Use Less CSS to write better CSS
+* Automatically minify CSS and Javascript code
+* Automatically concatenate CSS and Javascript files to reduce HTTP requests
+* Automatically generate sitemaps for your site
+
+The notable downside of Laze is that it does not help you generate a blog.
+That is not to say that you cannot blog using Laze, just that Laze does not
+relieve any pain.
+
+== Project setup
+
+A typical Laze project looks like this:
+
+  [project root directory]
+   |- input
+   |  `- index.html
+   |- layouts
+   |  `- default.html
+   |- includes
+   `- output
+
+The input directory holds all your content. Your final website will be
+generated in the output directory. The end result will look very much like
+what's in the input directory.
+
+The layouts directory holds files that can be wrapped around your content
+files. The includes directory holds files that any content file can include
+somewhere on its page.
+
+=== Transformation
+
+Here's the transformation process:
+
+1. Scan the input directory for all files and directories.
+2. Copy everything from /input over to /output...
+3. ...but when the file is an HTML page, apply a text filter and layout to it
+4. ...and when the file is a CSS file, expand and minify it
+5. ...and when the file is a Javascript file, concatenate and minify it
+
+=== More information
+
+* Liquid is supported in all HTML files (http://www.liquidmarkup.org)
+* Less is supported in all CSS files ending in +.less+ (http://lesscss.org/)
+* Markdown is supported in all HTML files
+  (http://daringfireball.net/projects/markdown/)
+* pngcrush (http://pmt.sourceforge.net/pngcrush/) and jpegtran
+  (http://jpegclub.org/) are used to optimize images.
+
+Furthermore, Laze depends on the following third-party Ruby gems:
+
+* liquid
+* rdiscount
+* redcloth
+
+It could optionally use the following Ruby gems:
+
+* jsmin
+* cssmin
+* directory_watcher
+* webrick
+* less
+
+== Bugs, issues and to do's
+
+There's still a lot to do. Please file bug reports or feature requests at the
+github project site (http://github.com/avdgaag/laze).
+
+== Credits
+
+Author:: Arjan van der Gaag
+E-mail:: arjan@arjanvandergaag.nl
+Website:: http://avdgaag.github.com
+Project website:: http://avdgaag.github.com/laze
+Project documentation:: http:://avdgaag.github.com/laze/rdoc
+Project source:: http://github.com/avdgaag/laze
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
   future version unintentionally.
 * Commit, do not mess with rakefile, version, or history.
   (if you want to have your own version, that is fine but
-   bump version in a commit by itself I can ignore when I pull)
+  bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
 == Copyright
